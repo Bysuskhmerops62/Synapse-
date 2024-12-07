@@ -7,7 +7,7 @@ local CoreGui = game:GetService("CoreGui")
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
-local font = Enum.Font.Arcade
+local font = Enum.Font.Legacy
 local ta = 0.5
 
 local redzlib = {
