@@ -281,6 +281,16 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 	})
 })
 
+local LibName = "UI_"..tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
+
+function redzlib:ToggleUI()
+	if game.CoreGui[LibName].Enabled then
+		game.CoreGui[LibName].Enabled = false
+	else
+		game.CoreGui[LibName].Enabled = true
+	end
+end
+
 local ScreenFind = CoreGui:FindFirstChild(ScreenGui.Name)
 if ScreenFind and ScreenFind ~= ScreenGui then
 	ScreenFind:Destroy()
@@ -700,28 +710,17 @@ function redzlib:MakeWindow(Configs)
 	}))
 	
 	local function ControlSize()
-		local Pos1, Pos2 = ControlSize1.Position, ControlSize2.Position
-		ControlSize1.Position = UDim2.fromOffset(math.clamp(Pos1.X.Offset, 430, 1000), math.clamp(Pos1.Y.Offset, 200, 500))
-		ControlSize2.Position = UDim2.new(0, math.clamp(Pos2.X.Offset, 135, 250), 1, 0)
 		
-		MainScroll.Size = UDim2.new(0, ControlSize2.Position.X.Offset, 1, -TopBar.Size.Y.Offset)
-		Containers.Size = UDim2.new(1, -MainScroll.Size.X.Offset, 1, -TopBar.Size.Y.Offset)
-		MainFrame.Size = ControlSize1.Position
 	end
 	
 	ControlSize1:GetPropertyChangedSignal("Position"):Connect(ControlSize)
 	ControlSize2:GetPropertyChangedSignal("Position"):Connect(ControlSize)
 	
 	ConnectSave(ControlSize1, function()
-		if not Minimized then
-			redzlib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
-			SaveJson("BYSUSKHMER LIBRARY.json", redzlib.Save)
-		end
+		
 	end)
 	
 	ConnectSave(ControlSize2, function()
-		redzlib.Save.TabSize = MainScroll.Size.X.Offset
-		SaveJson("BYSUSKHMER LIBRARY.json", redzlib.Save)
 	end)
 	
 	local ButtonsFolder = Create("Folder", TopBar, {
