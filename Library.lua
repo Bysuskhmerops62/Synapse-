@@ -273,7 +273,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "BLUE MOD",
+	Name = "core",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -569,7 +569,8 @@ function redzlib:SetTheme(NewTheme)
 end
 
 function redzlib:SetScale(NewScale)
-	
+	NewScale = ViewportSize.Y / math.clamp(NewScale, 300, 2000)
+	UIScale, ScreenGui.Scale.Scale = NewScale, NewScale
 end
 
 function redzlib:MakeWindow(Configs)
@@ -1649,7 +1650,11 @@ function redzlib:MakeWindow(Configs)
 			end)
 			
 			LabelVal:GetPropertyChangedSignal("Text"):Connect(function()
-				
+				UIScale.Scale = 0.3
+				CreateTween({UIScale, "Scale", 1.2, 0.1})
+				CreateTween({LabelVal, "Rotation", math.random(-1, 1) * 5, 0.15, true})
+				CreateTween({UIScale, "Scale", 1, 0.2})
+				CreateTween({LabelVal, "Rotation", 0, 0.1})
 			end)
 			
 			function SetSlider(NewValue)
