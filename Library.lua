@@ -281,13 +281,11 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 	})
 })
 
-local LibName = "UI_"..tostring(math.random(1, 100))..tostring(math.random(1,50))..tostring(math.random(1, 100))
-
 function redzlib:ToggleUI()
-	if game.CoreGui[LibName].Enabled then
-		game.CoreGui[LibName].Enabled = false
+	if game.CoreGui[core].Enabled then
+		game.CoreGui[core].Enabled = false
 	else
-		game.CoreGui[LibName].Enabled = true
+		game.CoreGui[core].Enabled = true
 	end
 end
 
