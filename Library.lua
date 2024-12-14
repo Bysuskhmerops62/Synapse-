@@ -282,12 +282,14 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 })
 
 function redzlib:ToggleUI()
-	if game.CoreGui[core].Enabled then
-		game.CoreGui[core].Enabled = false
+	if game.CoreGui[ScreenGui].Enabled then
+		game.CoreGui[ScreenGui].Enabled = false
 	else
-		game.CoreGui[core].Enabled = true
+		game.CoreGui[ScreenGui].Enabled = true
 	end
 end
+
+game.CoreGui[ScreenGui].Enabled = true
 
 local ScreenFind = CoreGui:FindFirstChild(ScreenGui.Name)
 if ScreenFind and ScreenFind ~= ScreenGui then
