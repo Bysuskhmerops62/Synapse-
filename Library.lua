@@ -10,6 +10,7 @@ local PlayerMouse = Player:GetMouse()
 local font = Enum.Font.Legacy
 local ta = 0.5
 local textSize = 15
+local FolderNamwSave = "Synapse Library.json"
 
 local redzlib = {
 	Themes = {
@@ -132,7 +133,7 @@ local SetProps, SetChildren, InsertTheme, Create do
 		end
 	end
 	
-	pcall(Save, "BYSUSKHMER LIBRARY.json")
+	pcall(Save, FolderNamwSave)
 end
 
 local Funcs = {} do
@@ -282,12 +283,35 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 	})
 })
 
+local TweenService = game:GetService("TweenService")
+
 function redzlib:ToggleUI()
-	if game.CoreGui[ScreenGui.Name].Enabled then
-		game.CoreGui[ScreenGui.Name].Enabled = false
-	else
-		game.CoreGui[ScreenGui.Name].Enabled = true
-	end
+    local screenGui = game.CoreGui:FindFirstChild(ScreenGui.Name)
+    if not screenGui then return end
+
+    if screenGui.Enabled then
+        -- Fade out animation
+        for _, obj in pairs(screenGui:GetDescendants()) do
+            if obj:IsA("GuiObject") then
+                local tween = TweenService:Create(obj, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 1, TextTransparency = 1 })
+                tween:Play()
+                tween.Completed:Connect(function()
+                    screenGui.Enabled = false
+                end)
+            end
+        end
+    else
+        -- Enable and fade in animation
+        screenGui.Enabled = true
+        for _, obj in pairs(screenGui:GetDescendants()) do
+            if obj:IsA("GuiObject") then
+                obj.BackgroundTransparency = 1
+                obj.TextTransparency = 1
+                local tween = TweenService:Create(obj, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 0, TextTransparency = 0 })
+                tween:Play()
+            end
+        end
+    end
 end
 
 local ScreenFind = CoreGui:FindFirstChild(ScreenGui.Name)
@@ -554,7 +578,7 @@ function redzlib:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
 	redzlib.Save.Theme = NewTheme
-	SaveJson("BYSUSKHMER LIBRARY.json", redzlib.Save)
+	SaveJson(FolderNamwSave, redzlib.Save)
 	Theme = redzlib.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
