@@ -283,35 +283,12 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 	})
 })
 
-local TweenService = game:GetService("TweenService")
-
 function redzlib:ToggleUI()
-    local screenGui = game.CoreGui:FindFirstChild(ScreenGui.Name)
-    if not screenGui then return end
-
-    if screenGui.Enabled then
-        -- Fade out animation
-        for _, obj in pairs(screenGui:GetDescendants()) do
-            if obj:IsA("GuiObject") then
-                local tween = TweenService:Create(obj, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 1, TextTransparency = 1 })
-                tween:Play()
-                tween.Completed:Connect(function()
-                    screenGui.Enabled = false
-                end)
-            end
-        end
-    else
-        -- Enable and fade in animation
-        screenGui.Enabled = true
-        for _, obj in pairs(screenGui:GetDescendants()) do
-            if obj:IsA("GuiObject") then
-                obj.BackgroundTransparency = 1
-                obj.TextTransparency = 1
-                local tween = TweenService:Create(obj, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { BackgroundTransparency = 0, TextTransparency = 0 })
-                tween:Play()
-            end
-        end
-    end
+	if game.CoreGui[ScreenGui.Name].Enabled then
+		game.CoreGui[ScreenGui.Name].Enabled = false
+	else
+		game.CoreGui[ScreenGui.Name].Enabled = true
+	end
 end
 
 local ScreenFind = CoreGui:FindFirstChild(ScreenGui.Name)
