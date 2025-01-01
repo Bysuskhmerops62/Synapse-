@@ -12,7 +12,7 @@ local ta = 0.5
 local textSize = 15
 local FolderNamwSave = "Synapse Library.json"
 
-local redzlib = {
+local synapse = {
 	Themes = {
 		Blue = {
 			["Color Hub 1"] = ColorSequence.new({
@@ -72,12 +72,12 @@ local redzlib = {
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 450
 
-local Settings = redzlib.Settings
-local Flags = redzlib.Flags
+local Settings = synapse.Settings
+local Flags = synapse.Flags
 
 local SetProps, SetChildren, InsertTheme, Create do
 	InsertTheme = function(Instance, Type)
-		table.insert(redzlib.Instances, {
+		table.insert(synapse.Instances, {
 			Instance = Instance,
 			Type = Type
 		})
@@ -126,9 +126,9 @@ local SetProps, SetChildren, InsertTheme, Create do
 			local decode = HttpService:JSONDecode(readfile(file))
 			
 			if type(decode) == "table" then
-				if rawget(decode, "UISize") then redzlib.Save["UISize"] = decode["UISize"] end
-				if rawget(decode, "TabSize") then redzlib.Save["TabSize"] = decode["TabSize"] end
-				if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then redzlib.Save["Theme"] = decode["Theme"] end
+				if rawget(decode, "UISize") then synapse.Save["UISize"] = decode["UISize"] end
+				if rawget(decode, "TabSize") then synapse.Save["TabSize"] = decode["TabSize"] end
+				if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then synapse.Save["Theme"] = decode["Theme"] end
 			end
 		end
 	end
@@ -193,7 +193,7 @@ local Funcs = {} do
 	end
 end
 
-local Connections, Connection = {}, redzlib.Connection do
+local Connections, Connection = {}, synapse.Connection do
 	local function NewConnectionList(List)
 		if type(List) ~= "table" then return end
 		
@@ -283,7 +283,7 @@ local ScreenGui = Create("ScreenGui", CoreGui, {
 	})
 })
 
-function redzlib:ToggleUI()
+function synapse:ToggleUI()
 	if game.CoreGui[ScreenGui.Name].Enabled then
 		game.CoreGui[ScreenGui.Name].Enabled = false
 	else
@@ -364,7 +364,7 @@ local function MakeDrag(Instance)
 end
 
 local function VerifyTheme(Theme)
-	for name,_ in pairs(redzlib.Themes) do
+	for name,_ in pairs(synapse.Themes) do
 		if name == Theme then
 			return true
 		end
@@ -378,14 +378,14 @@ local function SaveJson(FileName, save)
 	end
 end
 
-local Theme = redzlib.Themes[redzlib.Save.Theme]
+local Theme = synapse.Themes[synapse.Save.Theme]
 
 local function AddEle(Name, Func)
-	redzlib.Elements[Name] = Func
+	synapse.Elements[Name] = Func
 end
 
 local function Make(Ele, Instance, props, ...)
-	local Element = redzlib.Elements[Ele](Instance, props, ...)
+	local Element = synapse.Elements[Ele](Instance, props, ...)
 	return Element
 end
 
@@ -532,17 +532,17 @@ local function GetColor(Instance)
 end
 
 -- /////////// --
-function redzlib:GetIcon(IconName)
+function synapse:GetIcon(IconName)
 	if IconName:find("rbxassetid://") or IconName:len() < 1 then return IconName end
 	IconName = IconName:lower():gsub("lucide", ""):gsub("-", "")
 	
-	for Name, Icon in pairs(redzlib.Icons) do
+	for Name, Icon in pairs(synapse.Icons) do
 		Name = Name:gsub("lucide", ""):gsub("-", "")
 		if Name == IconName then
 			return Icon
 		end
 	end
-	for Name, Icon in pairs(redzlib.Icons) do
+	for Name, Icon in pairs(synapse.Icons) do
 		Name = Name:gsub("lucide", ""):gsub("-", "")
 		if Name:find(IconName) then
 			return Icon
@@ -551,15 +551,15 @@ function redzlib:GetIcon(IconName)
 	return IconName
 end
 
-function redzlib:SetTheme(NewTheme)
+function synapse:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
-	redzlib.Save.Theme = NewTheme
-	SaveJson(FolderNamwSave, redzlib.Save)
-	Theme = redzlib.Themes[NewTheme]
+	synapse.Save.Theme = NewTheme
+	SaveJson(FolderNamwSave, synapse.Save)
+	Theme = synapse.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
-	table.foreach(redzlib.Instances, function(_,Val)
+	table.foreach(synapse.Instances, function(_,Val)
 		if Val.Type == "Gradient" then
 			Val.Instance.Color = Theme["Color Hub 1"]
 		elseif Val.Type == "Frame" then
@@ -578,12 +578,12 @@ function redzlib:SetTheme(NewTheme)
 	end)
 end
 
-function redzlib:SetScale(NewScale)
+function synapse:SetScale(NewScale)
 	NewScale = ViewportSize.Y / math.clamp(NewScale, 300, 2000)
 	UIScale, ScreenGui.Scale.Scale = NewScale, NewScale
 end
 
-function redzlib:MakeWindow(Configs)
+function synapse:MakeWindow(Configs)
 	local WTitle = Configs[1] or Configs.Name or Configs.Title or "Blue Mod"
 	local WMiniText = Configs[2] or Configs.SubTitle or "by : Bysuskhmer"
 	
@@ -605,7 +605,7 @@ function redzlib:MakeWindow(Configs)
 		end
 	end;LoadFile()
 	
-	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
+	local UISizeX, UISizeY = unpack(synapse.Save.UISize)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
@@ -661,7 +661,7 @@ function redzlib:MakeWindow(Configs)
 	}), "Text")
 	
 	local MainScroll = InsertTheme(Create("ScrollingFrame", Components, {
-		Size = UDim2.new(0, redzlib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
+		Size = UDim2.new(0, synapse.Save.TabSize, 1, -TopBar.Size.Y.Offset),
 		ScrollBarImageColor3 = Theme["Color Theme"],
 		Position = UDim2.new(0, 0, 1, 0),
 		AnchorPoint = Vector2.new(0, 1),
@@ -919,9 +919,9 @@ function redzlib:MakeWindow(Configs)
 	end
 	function Window:SelectTab(TabSelect)
 		if type(TabSelect) == "number" then
-			redzlib.Tabs[TabSelect].func:Enable()
+			synapse.Tabs[TabSelect].func:Enable()
 		else
-			for _,Tab in pairs(redzlib.Tabs) do
+			for _,Tab in pairs(synapse.Tabs) do
 				if Tab.Cont == TabSelect.Cont then
 					Tab.func:Enable()
 				end
@@ -935,7 +935,7 @@ function redzlib:MakeWindow(Configs)
 		local TName = Configs[1] or Configs.Title or "Tab!"
 		local TIcon = Configs[2] or Configs.Icon or ""
 		
-		TIcon = redzlib:GetIcon(TIcon)
+		TIcon = synapse:GetIcon(TIcon)
 		if not TIcon:find("rbxassetid://") or TIcon:gsub("rbxassetid://", ""):len() < 6 then
 			TIcon = false
 		end
@@ -1011,7 +1011,7 @@ function redzlib:MakeWindow(Configs)
 			end
 			Container.Parent = Containers
 			Container.Size = UDim2.new(1, 0, 1, 150)
-			table.foreach(redzlib.Tabs, function(_,Tab)
+			table.foreach(synapse.Tabs, function(_,Tab)
 				if Tab.Cont ~= Container then
 					Tab.func:Disable()
 				end
@@ -1026,7 +1026,7 @@ function redzlib:MakeWindow(Configs)
 		
 		FirstTab = true
 		local Tab = {}
-		table.insert(redzlib.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
+		table.insert(synapse.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
 		Tab.Cont = Container
 		
 		function Tab:Disable()
@@ -1067,7 +1067,7 @@ function redzlib:MakeWindow(Configs)
 			}), "Text")
 			
 			local Section = {}
-			table.insert(redzlib.Options, {type = "Section", Name = SectionName, func = Section})
+			table.insert(synapse.Options, {type = "Section", Name = SectionName, func = Section})
 			function Section:Visible(Bool)
 				if Bool == nil then SectionFrame.Visible = not SectionFrame.Visible return end
 				SectionFrame.Visible = Bool
@@ -1856,4 +1856,4 @@ function redzlib:MakeWindow(Configs)
 	return Window
 end
 
-return redzlib
+return synapse
