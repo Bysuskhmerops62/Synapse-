@@ -14,17 +14,18 @@ local FolderNamwSave = "Synapse Library.json"
 
 local synapse = {
 	Themes = {
-		Blue = {
-			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 166)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 166))
-			}),
-			["Color Hub 2"] = Color3.fromRGB(0, 0, 166),
-			["Color Stroke"] = Color3.fromRGB(0, 0, 255),
-			["Color Theme"] = Color3.fromRGB(0, 0, 0),
-			["Color Text"] = Color3.fromRGB(255, 255, 255),
-			["Color Dark Text"] = Color3.fromRGB(255, 255, 255)
+		LighgV2 = {
+			{
+	["Color Hub 1"] = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), -- White
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(200, 200, 200)), -- Light Grey
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(200, 200, 200))  -- Light Grey
+	}),
+	["Color Hub 2"] = Color3.fromRGB(200, 200, 200), -- Light Grey for buttons
+	["Color Stroke"] = Color3.fromRGB(173, 107, 204), -- Purple
+	["Color Theme"] = Color3.fromRGB(245, 245, 245), -- Background: Soft Grey
+	["Color Text"] = Color3.fromRGB(0, 0, 0), -- Black for better contrast
+	["Color Dark Text"] = Color3.fromRGB(50, 50, 50) -- Dark Grey
 		},
 		Red = {
 			["Color Hub 1"] = ColorSequence.new({
@@ -57,7 +58,7 @@ local synapse = {
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "RedV2"
+		Theme = "LighgV2"
 	},
 	Settings = {},
 	Connection = {},
