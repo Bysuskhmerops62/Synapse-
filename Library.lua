@@ -15,7 +15,6 @@ local FolderNamwSave = "Synapse Library.json"
 local synapse = {
 	Themes = {
 		LighgV2 = {
-			{
 	["Color Hub 1"] = ColorSequence.new({
 		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), -- White
 		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(200, 200, 200)), -- Light Grey
