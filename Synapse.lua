@@ -782,7 +782,7 @@ Toggle.Draggable = true
 Toggle.MouseButton1Click:connect(function()
 spam()
 
- redzlib:ToggleUI()
+ synapse:ToggleUI()
 end)
 
 local ScreenGui1 = Instance.new("ScreenGui") 
