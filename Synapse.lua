@@ -1,9 +1,49 @@
-game:GetService("StarterGui"):SetCore("SendNotification", {
-		Title = "Loaded",
-		Text = "Please Wait About a minute.",
-		Duration = 10
-	})
+function noti2(title,title2,player)
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = title, 
+	Text = title2,
+	Icon = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png" 
+})
+end
 
+function express()
+    return {true, false} 
+end
+
+function opne(booble)
+    if booble == true then
+        return express()[1]  -- Returns the first value in the table (true)
+    else
+        return express()[2]  -- Returns the second value in the table (false)
+    end
+end
+
+function value(valueKey)
+    if valueKey == "" then
+        return "The valueKey is empty"  -- You can specify what to return if the string is empty
+    else
+        return valueKey  -- Return the valueKey if it is not empty
+    end
+end
+   
+function id(id)
+local song = Instance.new("Sound")
+	song.SoundId = "rbxassetid://"..id
+	song.Parent = game:GetService("SoundService")
+	song:Play()
+end
+
+id("17819405673")
+	
+function title(message,color)
+	game.StarterGui:SetCore("ChatMakeSystemMessage", {
+		Text = message,
+		Color = Color3.fromRGB(255,255,255),
+		Font = Enum.Font.Michroma,
+		TextSize = 18,})
+end
+
+title("Anti Kick ban Loaded", "old")
 	
 local function partgoto(partname)
 	
@@ -29,7 +69,7 @@ moveToPart(game:GetService("Players").Players.LocalPlayer)
 	end
 
 local loadingCOLOR = Color3.new(255, 0, 0)
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/Synapse-/refs/heads/main/Library.lua"))()
+local synapse = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/Synapse-/refs/heads/main/Library.lua"))()
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/Synapse-/refs/heads/main/notification_gui_library.lua.txt", true))()
 local MessageBox = loadstring(game:HttpGet("https://pastebin.com/raw/kQSh53xc"))()
 
@@ -458,7 +498,7 @@ local CoreGui = game:GetService("StarterGui")
 
 function spam()
 local sound = Instance.new("Sound")
-	sound.SoundId = "rbxassetid://413861777"
+	sound.SoundId = "rbxassetid://535716488"
 	sound.Parent = game:GetService("SoundService")
 	sound:Play()
 end
@@ -467,187 +507,24 @@ function run2(exe)
 Notification.new("message", "Co-crypto is running", "Script Create By @Ghost Player")
 wait(1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/Ghost%20Player%20Url.Api.lua.txt"))()execute("Script"..exe)
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
+		Text = "You have run a script.",
+		Color = Color3.fromRGB(255,255,255),
+		Font = Enum.Font.Michroma,
+		TextSize = 18,})
 end
 
 
 function run(script,size)
 
 spam()
-local gui = Instance.new("ScreenGui")
-gui.Name = "CustomLoader"
-gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 300, 0, 180)
-frame.Position = UDim2.new(0.5, -150, 0.9, -280)
-frame.BackgroundColor3 = loadingCOLOR
-frame.Parent = gui
-
-
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 10)
-corner.Parent = frame
-
-
-local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(0.99, 0, 0, 60)
-Title.Position = UDim2.new(0.03, 0, 0.10, 0)
-Title.BackgroundColor3 = Color3.new(0, 0, 0)
-Title.BackgroundTransparency = 1
-Title.TextColor3 = Color3.new(1, 1, 1)
-Title.TextSize = 7
-Title.Font = Enum.Font.Legacy
-Title.Text = ""
-Title.Parent = frame
-
-
-local loadingBarFrame = Instance.new("Frame")
-loadingBarFrame.Size = UDim2.new(0, 0, 0.2, 0)
-loadingBarFrame.Position = UDim2.new(0.02, 0, 0.7, 0)
-loadingBarFrame.BackgroundColor3 = Color3.new(20, 0, 21)
-loadingBarFrame.Parent = frame
-
-
-local corner_2 = Instance.new("UICorner")
-corner_2.CornerRadius = UDim.new(0, 6)
-corner_2.Parent = loadingBarFrame
-
-
-local LOAD = Instance.new("TextLabel")
-LOAD.Size = UDim2.new(0.95, 0, 0, 30)
-LOAD.Position = UDim2.new(0.03, 0, 0.7, 0)
-LOAD.BackgroundColor3 = Color3.new(0, 0, 0)
-LOAD.BackgroundTransparency = 1
-LOAD.TextColor3 = Color3.new(1, 1, 1)
-LOAD.TextSize = 18
-LOAD.Font = Enum.Font.Legacy
-LOAD.Text = "Loading..."
-LOAD.Parent = frame
-
-getgenv().ah = true
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if ah == true then
-            ping4 = tonumber(game:GetService("Stats"):FindFirstChild("PerformanceStats").Ping:GetValue())
- ping3 = math.floor(ping4)
-
-if ping3 < 50 then
-  PINGCAN2 = Random.new():NextInteger(10, 99)
-  PINTIME2 = 0.1
-  else 
-   if ping3 < 90 then
-   PINGCAN2 = Random.new():NextInteger(5, 70)
-   PINTIME2 = 0.1
-   else 
-    if ping3 < 130 then
-    PINGCAN2 = Random.new():NextInteger(5, 50)
-    PINTIME2 = 0.2
-    else 
-      if ping3 < 300 then
-      PINGCAN2 = Random.new():NextInteger(5, 15)
-      PINTIME2 = 0.2
-      else 
-       if ping3 < 500 then
-       PINGCAN2 = Random.new():NextInteger(5, 13)
-       PINTIME2 = 0.3
-       else 
-        if ping3 < 550 then
-         PINGCAN2 = Random.new():NextInteger(4, 10)
-         PINTIME2 = 0.5
-        else 
-        if ping3 < 600 then
-         PINGCAN2 = Random.new():NextInteger(1, 5)
-         PINTIME2 = 0.5
-        else 
-        if ping3 < 650 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 0.5
-        else 
-        if ping3 < 700 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 0.6
-        else 
-        if ping3 < 750 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 0.6
-        else 
-        if ping3 < 800 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 0.7
-        else 
-        if ping3 < 850 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 0.9
-        else 
-        if ping3 < 900 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 1
-        else 
-        if ping3 < 950 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 1
-        else 
-        if ping3 < 1000 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 1
-        else 
-        if ping3 < 1500 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 1
-        else 
-        if ping3 < 500000 then
-         PINGCAN2 = Random.new():NextInteger(1, 2)
-         PINTIME2 = 1
-        else 
-        PINGCAN2 = Random.new():NextInteger(1, 1)
-         PINTIME2 = 1
-        end
-        end
-        end
-        end
-        end
-        end
-        end
-        end
-        end
-        end
-        end
-        end
-       end
-      end
-    end
-   end
-  end
-  Title.Text = "PING + ( "..PINGCAN2.." )".." SPEED : "..PINTIME2.." Seconds".." PING : "..ping3
-        end
-    end)
-
-
-function animateLoadingBar()
-    local progress = 0
-
-    while progress < 100 do
-        progress = progress + PINGCAN2
-        updateProgress(progress)
-        wait(PINTIME2) 
-    end
-
-    LOAD.Text = "Successfully Loaded"
-  wait(0.5)
-  gui:Destroy()
-
 loadstring(game:HttpGet(script))()
 getgenv().ah = false
-end
-
-
-function updateProgress(progress)
-    loadingBarFrame.Size = UDim2.new(progress / 105, 0, 0.2, 0)
-    LOAD.Text = "Loading: " .. progress .. "%"
-end
-
-
-spawn(animateLoadingBar)
+game.StarterGui:SetCore("ChatMakeSystemMessage", {
+		Text = "You have run a script.",
+		Color = Color3.fromRGB(255,255,255),
+		Font = Enum.Font.Michroma,
+		TextSize = 18,})
 end
 
 function copy(text)
@@ -660,7 +537,7 @@ end
 
 joingame = false
 
-local Window = redzlib:MakeWindow({
+local Window = synapse:MakeWindow({
   Title = "Synapse | Universal V"..UserVersion,
   SubTitle = "",
   SaveFolder = "Synapse"
@@ -762,27 +639,44 @@ local t9 = Window:MakeTab({"Help", "lucide-info"})
 local t10 = Window:MakeTab({"Premium", "lucide-key"})
 local t11 = Window:MakeTab({"Other", "lucide-navigation"})
 
+local TweenService = game:GetService("TweenService")
+
 local ToggleGui = Instance.new("ScreenGui")
 local Toggle = Instance.new("ImageButton")
 
 ToggleGui.Name = "ToggleGui_HE"
 ToggleGui.Parent = game.CoreGui
 
-ToggleOpne = true
+local ToggleOpen = true
 
 Toggle.Name = "Toggle"
 Toggle.Parent = ToggleGui
 Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Toggle.BackgroundTransparency = 1
-Toggle.Position = UDim2.new(0, 0, 0.454706937, 0)
-Toggle.Size = UDim2.new(0.05,0,0.114,0)
+Toggle.Position = UDim2.new(1, -120, 0.4, 0)
+Toggle.Size = UDim2.new(0.05, 0, 0.114, 0)
 Toggle.Image = "rbxassetid://79267375061380"
 Toggle.Active = true
 Toggle.Draggable = true
-Toggle.MouseButton1Click:connect(function()
-spam()
+Toggle.Visible = true
 
- synapse:ToggleUI()
+local function animateUI(targetObject, propertyTable, duration)
+    local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local tween = TweenService:Create(targetObject, tweenInfo, propertyTable)
+    tween:Play()
+end
+
+Toggle.MouseButton1Click:Connect(function()
+    ToggleOpen = not ToggleOpen
+
+    if ToggleOpen then
+        animateUI(Toggle, {Size = UDim2.new(0.07, 0, 0.14, 0)}, 0.3)
+    else
+        animateUI(Toggle, {Size = UDim2.new(0.05, 0, 0.114, 0)}, 0.3)
+    end
+
+    spam()
+    synapse:ToggleUI()
 end)
 
 local ScreenGui1 = Instance.new("ScreenGui") 
@@ -1212,6 +1106,7 @@ if state then
 	
 	end
 end)
+
 
 t3:AddButton({"private SERVER", function()
 spam()
@@ -1695,7 +1590,7 @@ t3:AddButton({"Telekinesis [TOOLS]", function()
 end})
 
 t3:AddButton({"Boombox [TOOLS]", function()
-  _G.boomboxb = game:GetObjects('rbxassetid://740618400')[1]
+ _G.boomboxb = game:GetObjects('rbxassetid://2235994611')[1]
 _G.boomboxb.Parent = game:GetService'Players'.LocalPlayer.Backpack
 loadstring(_G.boomboxb.Client.Source)() 
 loadstring(_G.boomboxb.Server.Source)()
@@ -1757,7 +1652,7 @@ end
 end})
 
 t3:AddButton({"Ghost Hub ", function()
-  run("https://raw.githubusercontent.com/MainScripts352/MainScripts352/refs/heads/main/Ghost%20Hub")
+  run("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub")
 end})
 
 t3:AddButton({"X Mobile Old", function()
@@ -1772,17 +1667,11 @@ t3:AddButton({"ECCS Searcher V27", function()
   run("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/ECCS%20Searcher%20V2.7.lua.txt")
 end})
 
-local se1 = t3:AddSection({"@GhostPlayer"})
-
-t3:AddButton({"Math Problem", function()
-  run("https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Math%20Problem")
-end})
-
-t3:AddButton({"Tic Tac Toe", function()
-  run("https://raw.githubusercontent.com/GhostPlayer352/Test4/refs/heads/main/Tic%20Tac%20Toe")
-end})
-
 local se1 = t3:AddSection({"Execute"})
+
+t3:AddButton({"Arceus x [ PE ]", function()
+  run("https://raw.githubusercontent.com/Giangplay/Script/main/Arceus_X_V3.lua")
+end})
 
 t3:AddButton({"Synapse X [ PE Delta ]", function()
   run("https://raw.githubusercontent.com/delta-hydro/secret-host-haha/main/syn_ui_new.lua")
@@ -1810,6 +1699,12 @@ end})
 
 t4:AddButton({"Touch Fling GUi", function()
   run("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI")
+end})
+
+local pg1 = t5:AddSection({"Create a Cart Ride"})
+
+t5:AddButton({"Create a Cart Ride(HydraX)", function()
+  run("https://raw.githubusercontent.com/whiteinian/Aquaware/main/Main.lua")
 end})
 
 local pg1 = t5:AddSection({"KAT"})
@@ -2049,83 +1944,7 @@ elseif not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled an
 	devi = PC
 end
 
--- Firebase  Start 
-
-local function FirebaseUpdate()
-
-local Secret = "TFmuwLAHTNIjCNgKf4evVBBnweXZ1ameFiKYUwVX"
-local URL = "https://synapse-roblox-default-rtdb.firebaseio.com/"
-local database = URL..".json?auth="..Secret
-local data = game.HttpService:JSONDecode(game:HttpGetAsync(database))
-
-local UserOpne = data.Parent.Player.Key
-
-apis:Set("All have opened : "..UserOpne)
-
-end
-
-local Secret = "TFmuwLAHTNIjCNgKf4evVBBnweXZ1ameFiKYUwVX"
-local URL = "https://synapse-roblox-default-rtdb.firebaseio.com/"
-local database = URL..".json?auth="..Secret
-local data = game.HttpService:JSONDecode(game:HttpGetAsync(database))
-
- 
-
-
-Notification.new("message", "Check Version", "")
-
-local firebaseName = "."..game.Players.LocalPlayer.Name
- local UserOpne = data.Parent.Player.Key
-
- 
- local UserAll = data.Parent.Player.AllPlayer
-
- 
- local Update = data.update.SentUp
- local Version = data.update.Version
- 
-
- 
- if Version > UserVersion then
- Notification.new("message", "Your version has expired", "")
- else 
- Notification.new("message", "Version has not expired", "")
- end
-
-
-UserOpne = UserOpne + 1
-
-local Secret = "TFmuwLAHTNIjCNgKf4evVBBnweXZ1ameFiKYUwVX"
-local URL = "https://synapse-roblox-default-rtdb.firebaseio.com/"
-local Folder = "Parent/Player"
- 
-local database = URL..Folder..".json?auth="..Secret
-local request = request or syn.request
-local Table = {}
- 
-if game.HttpService:JSONDecode(game:HttpGetAsync(database)) ~= nil then
-   for key, value in pairs(game.HttpService:JSONDecode(game:HttpGetAsync(database))) do
-     if key then
-        Table[key] = value
-     end
-   end
-end
- 
-Table["Key"] = UserOpne
- 
-local send = request({
-   Url = database,
-   Method = "PUT",
-   Headers = {["Content-Type"] = "application/json"},
-   Body = game.HttpService:JSONEncode(Table)
-})
-
--- Part 2
-
-list = 0
-
--- End Firebase 
-
+local ex = t0:AddSection({"You Play : "})
 
 t0:AddDiscordInvite({
   Name = "Synapse  | GROUP",
@@ -2135,13 +1954,9 @@ t0:AddDiscordInvite({
 
 local t00 = t0:AddSection({"Game Data"})
 
-local cs1 = t0:AddSection({"Members have Opne : "..list})
-
 local t00 = t0:AddSection({"Game Clock : "..game:GetService("Lighting").ClockTime})
 
 local cs2 = t0:AddSection({"Health : "..game.Players.LocalPlayer.Character.Humanoid.Health})
-
-local cs1 = t0:AddSection({"All have opened : "})
 
 local t00 = t0:AddSection({"You Profile"})
 
@@ -2226,6 +2041,10 @@ local lo1 = t0:AddSection({"NO DATE"})
 
 local lo2 = t0:AddSection({"NO DATE"})
 
+local TimeSpam1 = 0  -- នាទី
+local TimeSpam2 = 0 -- វិនាទី
+local TimeSpam3 = 0 -- ម៉ោង
+
 getgenv().update = true
     game:GetService("RunService").Heartbeat:Connect(function()
         if update == true then
@@ -2242,7 +2061,6 @@ getgenv().update = true
                 t05:Set("Player In Server [ "..#game.Players:GetPlayers().." / "..game.Players.MaxPlayers.." ]")
                 t07:Set("Now Time [ "..os.date("%X").." ]")
                 cs2:Set("Health : "..game.Players.LocalPlayer.Character.Humanoid.Health)
-                cs1:Set("All have opened : "..UserOpne)
                 TextLabel1.Text = game.Players.LocalPlayer.Character.Humanoid.Health.."%"
                 if fps > 59 then
   lo1:Set("FPS : Good 🟢")
@@ -2292,13 +2110,10 @@ if ping2 < 300 then
    end
   end
   
-  FirebaseUpdate()
- 
             end)
         end
     end)
     
-wait(1)
 
 local t66 = t6:AddSection({"Animation R15"})
 
@@ -2668,35 +2483,524 @@ t7:AddButton({"Esp Map", function()
   run("https://pastebin.com/e5tMrV7y")
 end})
 
+local function getPlayerByName(playerName)
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player.Name:lower() == playerName:lower() then
+            return player
+        end
+    end
+    return nil
+end
+
 t8:AddTextBox({
   Name = "Enter Player Name",
   Description = "Enter Name",
   Default = "",
   Callback = function(Value)
     Username=Value
-    
-    local target=getPlr(Username)
   end
 })
 
 t8:AddButton({"Goto", function()
 spam()
 	
-		GotoPlayer(Username)
+		local playerName = Username
+    local player = getPlayerByName(playerName)
+    if player then
+        local targetHumanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+        if targetHumanoidRootPart then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetHumanoidRootPart.CFrame
+        end
+    else
+        print("Player not found!")
+    end
+end})
+
+t8:AddButton({"Esp", function()
+spam()
+	
+		local playerName = Username
+    local player = getPlayerByName(playerName)
+    if player then
+        local highlight = Instance.new("Highlight")
+        highlight.Parent = player.Character
+        highlight.FillColor = Color3.fromRGB(255, 0, 0) -- កំណត់ពណ៌ក្រហមសម្រាប់ ESP
+        highlight.FillTransparency = 0.5
+    else
+        print("Player not found!")
+    end
 end})
 
 t8:AddButton({"Check Age", function()
 spam()
 
-	teller=target.AccountAge
-	accountage="The account age of "..target.Name.." is "..teller
-	
-	noti(accountage)
+	local playerName = Username
+    local player = getPlayerByName(playerName)
+    if player then
+        -- ពិនិត្យអាយុ
+        local age = player.AccountAge
+        print(player.Name .. " has been on Roblox for " .. age .. " days.")
+        
+        -- បង្ហាញជាមួយ TextBox ឬ Notification
+        local ageMessage = "Player " .. player.Name .. " has been on Roblox for " .. age .. " days."
+        noti("Player For : Roblox", ageMessage)
+    else
+        print("Player not found!")
+    end
 end})
 
 t8:AddButton({"Fling", function()
 spam()
-	flingplayer(Username)
+	local Targets = Username
+
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+
+local AllBool = false
+
+local GetPlayer = function(Name)
+    Name = Name:lower()
+    if Name == "all" or Name == "others" then
+        AllBool = true
+        return
+    elseif Name == "random" then
+        local GetPlayers = Players:GetPlayers()
+        if table.find(GetPlayers,Player) then table.remove(GetPlayers,table.find(GetPlayers,Player)) end
+        return GetPlayers[math.random(#GetPlayers)]
+    elseif Name ~= "random" and Name ~= "all" and Name ~= "others" then
+        for _,x in next, Players:GetPlayers() do
+            if x ~= Player then
+                if x.Name:lower():match("^"..Name) then
+                    return x;
+                elseif x.DisplayName:lower():match("^"..Name) then
+                    return x;
+                end
+            end
+        end
+    else
+        return
+    end
+end
+
+local Message = function(_Title, _Text, Time)
+    game:GetService("StarterGui"):SetCore("SendNotification", {Title = _Title, Text = _Text, Duration = Time})
+end
+
+local SkidFling = function(TargetPlayer)
+    local Character = Player.Character
+    local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+    local RootPart = Humanoid and Humanoid.RootPart
+
+    local TCharacter = TargetPlayer.Character
+    local THumanoid
+    local TRootPart
+    local THead
+    local Accessory
+    local Handle
+
+    if TCharacter:FindFirstChildOfClass("Humanoid") then
+        THumanoid = TCharacter:FindFirstChildOfClass("Humanoid")
+    end
+    if THumanoid and THumanoid.RootPart then
+        TRootPart = THumanoid.RootPart
+    end
+    if TCharacter:FindFirstChild("Head") then
+        THead = TCharacter.Head
+    end
+    if TCharacter:FindFirstChildOfClass("Accessory") then
+        Accessory = TCharacter:FindFirstChildOfClass("Accessory")
+    end
+    if Accessoy and Accessory:FindFirstChild("Handle") then
+        Handle = Accessory.Handle
+    end
+
+    if Character and Humanoid and RootPart then
+        if RootPart.Velocity.Magnitude < 50 then
+            getgenv().OldPos = RootPart.CFrame
+        end
+        if THumanoid and THumanoid.Sit and not AllBool then
+            return Message("Error Occurred", "Targeting is sitting", 5) -- u can remove dis part if u want lol
+        end
+        if THead then
+            workspace.CurrentCamera.CameraSubject = THead
+        elseif not THead and Handle then
+            workspace.CurrentCamera.CameraSubject = Handle
+        elseif THumanoid and TRootPart then
+            workspace.CurrentCamera.CameraSubject = THumanoid
+        end
+        if not TCharacter:FindFirstChildWhichIsA("BasePart") then
+            return
+        end
+        
+        local FPos = function(BasePart, Pos, Ang)
+            RootPart.CFrame = CFrame.new(BasePart.Position) * Pos * Ang
+            Character:SetPrimaryPartCFrame(CFrame.new(BasePart.Position) * Pos * Ang)
+            RootPart.Velocity = Vector3.new(9e7, 9e7 * 10, 9e7)
+            RootPart.RotVelocity = Vector3.new(9e8, 9e8, 9e8)
+        end
+        
+        local SFBasePart = function(BasePart)
+            local TimeToWait = 2
+            local Time = tick()
+            local Angle = 0
+
+            repeat
+                if RootPart and THumanoid then
+                    if BasePart.Velocity.Magnitude < 50 then
+                        Angle = Angle + 100
+
+                        FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(2.25, 1.5, -2.25) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(-2.25, -1.5, 2.25) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection,CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection,CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+                    else
+                        FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, -THumanoid.WalkSpeed), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+                        
+                        FPos(BasePart, CFrame.new(0, 1.5, TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, -TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5 ,0), CFrame.Angles(math.rad(-90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+                        task.wait()
+                    end
+                else
+                    break
+                end
+            until BasePart.Velocity.Magnitude > 500 or BasePart.Parent ~= TargetPlayer.Character or TargetPlayer.Parent ~= Players or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
+        end
+        
+        workspace.FallenPartsDestroyHeight = 0/0
+        
+        local BV = Instance.new("BodyVelocity")
+        BV.Name = "EpixVel"
+        BV.Parent = RootPart
+        BV.Velocity = Vector3.new(9e8, 9e8, 9e8)
+        BV.MaxForce = Vector3.new(1/0, 1/0, 1/0)
+        
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+        
+        if TRootPart and THead then
+            if (TRootPart.CFrame.p - THead.CFrame.p).Magnitude > 5 then
+                SFBasePart(THead)
+            else
+                SFBasePart(TRootPart)
+            end
+        elseif TRootPart and not THead then
+            SFBasePart(TRootPart)
+        elseif not TRootPart and THead then
+            SFBasePart(THead)
+        elseif not TRootPart and not THead and Accessory and Handle then
+            SFBasePart(Handle)
+        else
+            return Message("Error Occurred", "Target is missing everything", 5)
+        end
+        
+        BV:Destroy()
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+        workspace.CurrentCamera.CameraSubject = Humanoid
+        
+        repeat
+            RootPart.CFrame = getgenv().OldPos * CFrame.new(0, .5, 0)
+            Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
+            Humanoid:ChangeState("GettingUp")
+            table.foreach(Character:GetChildren(), function(_, x)
+                if x:IsA("BasePart") then
+                    x.Velocity, x.RotVelocity = Vector3.new(), Vector3.new()
+                end
+            end)
+            task.wait()
+        until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
+        workspace.FallenPartsDestroyHeight = getgenv().FPDH
+    else
+        return Message("Error Occurred", "Random error", 5)
+    end
+end
+
+if not Welcome then Message("Script by AnthonyIsntHere", "Enjoy!", 5) end
+getgenv().Welcome = true
+if Targets[1] then for _,x in next, Targets do GetPlayer(x) end else return end
+
+if AllBool then
+    for _,x in next, Players:GetPlayers() do
+        SkidFling(x)
+    end
+end
+
+for _,x in next, Targets do
+    if GetPlayer(x) and GetPlayer(x) ~= Player then
+        if GetPlayer(x).UserId ~= 1414978355 then
+            local TPlayer = GetPlayer(x)
+            if TPlayer then
+                SkidFling(TPlayer)
+            end
+        else
+            Message("Error Occurred", "This user is whitelisted! (Owner)", 5)
+        end
+    elseif not GetPlayer(x) and not AllBool then
+        Message("Error Occurred", "Username Invalid", 5)
+    end
+end
+end})
+
+t8:AddButton({"Fling All", function()
+spam()
+	local Targets = {"All"} -- "All", "Target Name", "arian_was_here"
+
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+
+local AllBool = false
+
+local GetPlayer = function(Name)
+    Name = Name:lower()
+    if Name == "all" or Name == "others" then
+        AllBool = true
+        return
+    elseif Name == "random" then
+        local GetPlayers = Players:GetPlayers()
+        if table.find(GetPlayers,Player) then table.remove(GetPlayers,table.find(GetPlayers,Player)) end
+        return GetPlayers[math.random(#GetPlayers)]
+    elseif Name ~= "random" and Name ~= "all" and Name ~= "others" then
+        for _,x in next, Players:GetPlayers() do
+            if x ~= Player then
+                if x.Name:lower():match("^"..Name) then
+                    return x;
+                elseif x.DisplayName:lower():match("^"..Name) then
+                    return x;
+                end
+            end
+        end
+    else
+        return
+    end
+end
+
+local Message = function(_Title, _Text, Time)
+    game:GetService("StarterGui"):SetCore("SendNotification", {Title = _Title, Text = _Text, Duration = Time})
+end
+
+local SkidFling = function(TargetPlayer)
+    local Character = Player.Character
+    local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+    local RootPart = Humanoid and Humanoid.RootPart
+
+    local TCharacter = TargetPlayer.Character
+    local THumanoid
+    local TRootPart
+    local THead
+    local Accessory
+    local Handle
+
+    if TCharacter:FindFirstChildOfClass("Humanoid") then
+        THumanoid = TCharacter:FindFirstChildOfClass("Humanoid")
+    end
+    if THumanoid and THumanoid.RootPart then
+        TRootPart = THumanoid.RootPart
+    end
+    if TCharacter:FindFirstChild("Head") then
+        THead = TCharacter.Head
+    end
+    if TCharacter:FindFirstChildOfClass("Accessory") then
+        Accessory = TCharacter:FindFirstChildOfClass("Accessory")
+    end
+    if Accessoy and Accessory:FindFirstChild("Handle") then
+        Handle = Accessory.Handle
+    end
+
+    if Character and Humanoid and RootPart then
+        if RootPart.Velocity.Magnitude < 50 then
+            getgenv().OldPos = RootPart.CFrame
+        end
+        if THumanoid and THumanoid.Sit and not AllBool then
+            return Message("Error Occurred", "Targeting is sitting", 5) -- u can remove dis part if u want lol
+        end
+        if THead then
+            workspace.CurrentCamera.CameraSubject = THead
+        elseif not THead and Handle then
+            workspace.CurrentCamera.CameraSubject = Handle
+        elseif THumanoid and TRootPart then
+            workspace.CurrentCamera.CameraSubject = THumanoid
+        end
+        if not TCharacter:FindFirstChildWhichIsA("BasePart") then
+            return
+        end
+        
+        local FPos = function(BasePart, Pos, Ang)
+            RootPart.CFrame = CFrame.new(BasePart.Position) * Pos * Ang
+            Character:SetPrimaryPartCFrame(CFrame.new(BasePart.Position) * Pos * Ang)
+            RootPart.Velocity = Vector3.new(9e7, 9e7 * 10, 9e7)
+            RootPart.RotVelocity = Vector3.new(9e8, 9e8, 9e8)
+        end
+        
+        local SFBasePart = function(BasePart)
+            local TimeToWait = 2
+            local Time = tick()
+            local Angle = 0
+
+            repeat
+                if RootPart and THumanoid then
+                    if BasePart.Velocity.Magnitude < 50 then
+                        Angle = Angle + 100
+
+                        FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle),0 ,0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(2.25, 1.5, -2.25) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(-2.25, -1.5, 2.25) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection,CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection,CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+                    else
+                        FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, -THumanoid.WalkSpeed), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+                        
+                        FPos(BasePart, CFrame.new(0, 1.5, TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, -TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5 ,0), CFrame.Angles(math.rad(-90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+                        task.wait()
+                    end
+                else
+                    break
+                end
+            until BasePart.Velocity.Magnitude > 500 or BasePart.Parent ~= TargetPlayer.Character or TargetPlayer.Parent ~= Players or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
+        end
+        
+        workspace.FallenPartsDestroyHeight = 0/0
+        
+        local BV = Instance.new("BodyVelocity")
+        BV.Name = "EpixVel"
+        BV.Parent = RootPart
+        BV.Velocity = Vector3.new(9e8, 9e8, 9e8)
+        BV.MaxForce = Vector3.new(1/0, 1/0, 1/0)
+        
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+        
+        if TRootPart and THead then
+            if (TRootPart.CFrame.p - THead.CFrame.p).Magnitude > 5 then
+                SFBasePart(THead)
+            else
+                SFBasePart(TRootPart)
+            end
+        elseif TRootPart and not THead then
+            SFBasePart(TRootPart)
+        elseif not TRootPart and THead then
+            SFBasePart(THead)
+        elseif not TRootPart and not THead and Accessory and Handle then
+            SFBasePart(Handle)
+        else
+            return Message("Error Occurred", "Target is missing everything", 5)
+        end
+        
+        BV:Destroy()
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+        workspace.CurrentCamera.CameraSubject = Humanoid
+        
+        repeat
+            RootPart.CFrame = getgenv().OldPos * CFrame.new(0, .5, 0)
+            Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
+            Humanoid:ChangeState("GettingUp")
+            table.foreach(Character:GetChildren(), function(_, x)
+                if x:IsA("BasePart") then
+                    x.Velocity, x.RotVelocity = Vector3.new(), Vector3.new()
+                end
+            end)
+            task.wait()
+        until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
+        workspace.FallenPartsDestroyHeight = getgenv().FPDH
+    else
+        return Message("Error Occurred", "Random error", 5)
+    end
+end
+
+if not Welcome then Message("Script by AnthonyIsntHere", "Enjoy!", 5) end
+getgenv().Welcome = true
+if Targets[1] then for _,x in next, Targets do GetPlayer(x) end else return end
+
+if AllBool then
+    for _,x in next, Players:GetPlayers() do
+        SkidFling(x)
+    end
+end
+
+for _,x in next, Targets do
+    if GetPlayer(x) and GetPlayer(x) ~= Player then
+        if GetPlayer(x).UserId ~= 1414978355 then
+            local TPlayer = GetPlayer(x)
+            if TPlayer then
+                SkidFling(TPlayer)
+            end
+        else
+            Message("Error Occurred", "This user is whitelisted! (Owner)", 5)
+        end
+    elseif not GetPlayer(x) and not AllBool then
+        Message("Error Occurred", "Username Invalid", 5)
+    end
+end
 end})
 
 t9:AddButton({"Part Name", function()
@@ -2739,6 +3043,15 @@ end})
 getgenv().NotiPJoim = true
 getgenv().NotiLevae = true
 
+function getPartByName(name)
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part.Name == name and part:IsA("BasePart") then
+            return part
+        end
+    end
+    return nil
+end
+
 local title = t11:AddSection({"Part For Game [Data]"})
 
 t11:AddTextBox({
@@ -2746,18 +3059,135 @@ t11:AddTextBox({
   Description = "Enter Part",
   Default = "",
   Callback = function(Value)
-    PartName = Value
+    getgenv().PartName = Value
   end
 })
 
-t11:AddButton({"Goto", function()
+t11:AddButton({"Teleport", function()
 spam()
-  partgoto(PartName)
+  local partName = PartName
+    local part = getPartByName(partName)
+    if part then
+        game.Players.LocalPlayer.Character:MoveTo(part.Position)
+        print("Teleported to:", partName)
+    else
+        print("Part not found:", partName)
+    end
 end})
+
+local loopgoto = t11:AddToggle({
+  Name = "Loop Teleport",
+  Default = false
+})
+
+loopgoto:Callback(function(s)
+spam()
+  getgenv().np1 = s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if np1 == true then
+            pcall(function()
+                local partName = PartName
+    local part = getPartByName(partName)
+    if part then
+        game.Players.LocalPlayer.Character:MoveTo(part.Position)
+        print("Teleported to:", partName)
+    else
+        print("Part not found:", partName)
+    end
+            end)
+        end
+    end)
+end)
+
+t11:AddButton({"Bring", function()
+spam()
+  local partName = PartName
+    local part = getPartByName(partName)
+    if part then
+        part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 5, 0)
+        print("Brought part:", partName)
+    else
+        print("Part not found:", partName)
+    end
+end})
+
+local bring = t11:AddToggle({
+  Name = "Loop bring",
+  Default = false
+})
+
+bring:Callback(function(s)
+spam()
+  getgenv().np2 = s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if np2 == true then
+            pcall(function()
+                local partName = PartName
+    local part = getPartByName(partName)
+    if part then
+        part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 5, 0)
+        print("Brought part:", partName)
+    else
+        print("Part not found:", partName)
+    end
+            end)
+        end
+    end)
+end)
+
+t11:AddButton({"Click", function()
+spam()
+  local partName = PartName
+    local part = getPartByName(partName)
+    if part then
+        -- ពិនិត្យមើលថា part មាន ClickDetector រឺអត់
+        local clickDetector = part:FindFirstChildOfClass("ClickDetector")
+        if clickDetector then
+            -- បញ្ជាក់ MouseClick នៅលើ ClickDetector
+            clickDetector:MouseClick(game.Players.LocalPlayer.Character.HumanoidRootPart)
+            print("Clicked part:", partName)
+        else
+            print("ClickDetector មិនត្រូវបានរកឃើញនៅលើ part:", partName)
+        end
+    else
+        print("Part មិនត្រូវបានរកឃើញ:", partName)
+    end
+end})
+
+local loopclick = t11:AddToggle({
+  Name = "Loop Click",
+  Default = false
+})
+
+loopclick:Callback(function(s)
+spam()
+  getgenv().np3 = s
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if np3 == true then
+            pcall(function()
+                local partName = PartName
+    local part = getPartByName(partName)
+    if part then
+        -- ពិនិត្យមើលថា part មាន ClickDetector រឺអត់
+        local clickDetector = part:FindFirstChildOfClass("ClickDetector")
+        if clickDetector then
+            -- បញ្ជាក់ MouseClick នៅលើ ClickDetector
+            clickDetector:MouseClick(game.Players.LocalPlayer.Character.HumanoidRootPart)
+            print("Clicked part:", partName)
+        else
+            print("ClickDetector មិនត្រូវបានរកឃើញនៅលើ part:", partName)
+        end
+    else
+        print("Part មិនត្រូវបានរកឃើញ:", partName)
+    end
+            end)
+        end
+    end)
+end)
 
 local title = t11:AddSection({"System Notification"})
 
-local sp1 = t1:AddToggle({
+local sp1 = t11:AddToggle({
   Name = "Notification Player Join",
   Default = true
 })
@@ -2767,7 +3197,7 @@ spam()
   getgenv().NotiPJoim = s
 end)
 
-local sp2 = t1:AddToggle({
+local sp2 = t11:AddToggle({
   Name = "Notification Player Levae",
   Default = true
 })
@@ -2777,7 +3207,21 @@ spam()
   getgenv().NotiLevae = s
 end)
 
--- Check Game Pass 80 Robux
+while true do
+    TimeSpam2 = TimeSpam2 + 1
+    if TimeSpam2 == 60 then
+        TimeSpam2 = 0
+        TimeSpam1 = TimeSpam1 + 1
+    end
+    if TimeSpam1 == 60 then
+        TimeSpam1 = 0
+        TimeSpam3 = TimeSpam3 + 1
+    end
+    ex:Set("You Play : " .. TimeSpam3 .. " h " .. TimeSpam1 .. " m " .. TimeSpam2 .. " s ")
+    wait(1)
+end
+
+
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
 local HttpService = game:GetService("HttpService")
@@ -2803,12 +3247,7 @@ local function checkGamePass(player)
 
     local propass = hasGamePass and "Yes" or "No"
 
-
-    StarterGui:SetCore("SendNotification", {
-        Title = "Loaded ✓",
-        Text = "Premium [" .. propass .. "]",
-        Duration = 5
-    })
+    noti2("Loaded ✓, It's working.")
 end
 
 checkGamePass(game:GetService("Players").LocalPlayer)
@@ -2816,13 +3255,8 @@ checkGamePass(game:GetService("Players").LocalPlayer)
 local StarterGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
 
--- Function ដើម្បីបង្ហាញ Notification
 local function notifyAdmin(player)
-    	game.StarterGui:SetCore("ChatMakeSystemMessage", {
-		Text = player.Name .. " has joined the game!",
-		Color = Color3.fromRGB(0, 255, 3),
-		Font = Enum.Font.Michroma,
-		TextSize = 18,})
+		noti2(player.Name.." has joined the game!", "Age : ", player)
 end
 
 Players.PlayerAdded:Connect(notifyAdmin)
@@ -2830,14 +3264,13 @@ Players.PlayerAdded:Connect(notifyAdmin)
 local Players = game:GetService("Players")
 
 Players.PlayerRemoving:Connect(function(player)
-        	game.StarterGui:SetCore("ChatMakeSystemMessage", {
-		Text = player.Name .. " has levae the game!",
-		Color = Color3.fromRGB(255, 0, 0),
-		Font = Enum.Font.Michroma,
-		TextSize = 18,})
+		noti2(player.Name .. " has levae the game!", "Age : ", player)
 end)
 
 end
+ 
 
 wait(1)
+
+
 MAIN1()
