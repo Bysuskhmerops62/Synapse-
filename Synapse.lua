@@ -6,6 +6,36 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 })
 end
 
+local function isNumber(str)
+  if tonumber(str) ~= nil or str == 'inf' then
+    return true
+  end
+end
+
+local Players = game:GetService("Players")
+
+-- Function to get player(s) based on the argument
+local function getPlayer(input, speaker)
+    local foundPlayers = {}
+    for _, player in pairs(Players:GetPlayers()) do
+        if player.Name:lower():sub(1, #input) == input:lower() then
+            table.insert(foundPlayers, player)
+        end
+    end
+    return foundPlayers
+end
+
+-- Main Logic
+local function copyPlayerNames(args, speaker)
+    local players = getPlayer(args[1], speaker) -- Fetch players
+    for _, player in pairs(players) do
+        local Username = tostring(player.Name) -- Convert player name to string
+        print("Copied name to clipboard: " .. name)
+    end
+end
+
+-- Example call
+
 function express()
     return {true, false} 
 end
@@ -232,12 +262,6 @@ function getPlrHum(plr)
 		return getChar():FindFirstChildOfClass("Humanoid")
 	else
 		return false
-	end
-end
-
-function isNumber(str)
-	if tonumber(str)~=nil or str=='inf' then
-		return true
 	end
 end
 
@@ -493,7 +517,7 @@ end
 
 function MAIN1()
 local IP = game.HttpService:JSONDecode(game:HttpGet("https://ipwho.is/"))
-local UserVersion = 1.5
+local UserVersion = 1.6
 local CoreGui = game:GetService("StarterGui")
 
 function spam()
@@ -515,7 +539,7 @@ game.StarterGui:SetCore("ChatMakeSystemMessage", {
 end
 
 
-function run(script,size)
+function run(script)
 
 spam()
 loadstring(game:HttpGet(script))()
@@ -933,6 +957,10 @@ t1:AddSlider({
   end
 })
 
+function isNumber(value)
+    return typeof(value) == "number"
+end
+
 t1:AddSlider({
   Name = "Tp Speed",
   Min = 1,
@@ -951,6 +979,21 @@ local tpwalk = t1:AddToggle({
 
 tpwalk:Callback(function(s)
 spam()
+getgenv().TPWalk = s
+local hb = game:GetService("RunService").Heartbeat
+local player = game:GetService("Players")
+local lplr = player.LocalPlayer
+local chr = lplr.Character
+local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+while getgenv().TPWalk and hb:Wait() and chr and hum and hum.Parent do
+  if hum.MoveDirection.Magnitude > 0 then
+    if getgenv().TPSpeed and isNumber(getgenv().TPSpeed) then
+      chr:TranslateBy(hum.MoveDirection * tonumber(getgenv().TPSpeed))
+    else
+      chr:TranslateBy(hum.MoveDirection)
+    end
+  end
+end
 end)
 
 local player = game.Players.LocalPlayer
@@ -1105,6 +1148,25 @@ if state then
 	else 
 	
 	end
+end)
+
+local player = game:GetService("Players").LocalPlayer
+local UIS = game:GetService("UserInputService")
+local myzaza = true
+
+-- Assuming t3 is already defined and adds the toggle
+local spam8 = t3:AddToggle({
+    Name = "Kill Block",   -- Name of the toggle button
+    Default = false        -- Default state of the toggle button (false = off)
+})
+
+-- Callback function for toggle
+spam8:Callback(function(state)
+if state == true then
+    myzaza = false 
+else 
+myzaza = true 
+end
 end)
 
 
@@ -2040,79 +2102,6 @@ local pol = t0:AddSection({"You User : "..device})
 local lo1 = t0:AddSection({"NO DATE"})
 
 local lo2 = t0:AddSection({"NO DATE"})
-
-local TimeSpam1 = 0  -- នាទី
-local TimeSpam2 = 0 -- វិនាទី
-local TimeSpam3 = 0 -- ម៉ោង
-
-getgenv().update = true
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if update == true then
-            pcall(function()
-                t01:Set("You Age [ "..game.Players.LocalPlayer.AccountAge.." Day".." ]")
-                t03:Set("Game ID [ "..game.PlaceId.." ]")
-                fps = math.floor(workspace:GetRealPhysicsFPS())
-                ping1 = tonumber(game:GetService("Stats"):FindFirstChild("PerformanceStats").Ping:GetValue())
-                ping2 = math.floor(ping1)
-                FPSSACN = "NOT"
-                age = game.Players.LocalPlayer.AccountAge
-                t02:Set("You FPS [ "..math.floor(workspace:GetRealPhysicsFPS()).." ]")
-                t04:Set("You Ping [ "..game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString().." ]")
-                t05:Set("Player In Server [ "..#game.Players:GetPlayers().." / "..game.Players.MaxPlayers.." ]")
-                t07:Set("Now Time [ "..os.date("%X").." ]")
-                cs2:Set("Health : "..game.Players.LocalPlayer.Character.Humanoid.Health)
-                TextLabel1.Text = game.Players.LocalPlayer.Character.Humanoid.Health.."%"
-                if fps > 59 then
-  lo1:Set("FPS : Good 🟢")
-  FPSSACN = "Good 🟢"
-  else 
-   if fps > 30 then
-   lo1:Set("FPS : Normal 🟠")
-   FPSSACN = "Normal 🟠"
-   else 
-    if fps > 19 then
-    lo1:Set("FPS : Weak 🔴")
-    FPSSACN = "Weak ??"
-    else 
-      if fps > 10 then
-      lo1:Set("FPS : Bed ⛔")
-      FPSSACN = "Bed ⛔"
-      else 
-       if fps > 5 then
-       lo1:Set("FPS : Be careful ⚠️")
-       FPSSACN = "Be careful ⚠️"
-       end
-      end
-    end
-   end
-  end
-  
-if ping2 < 300 then
-  lo2:Set("PING : Good 🟢")
-  else 
-   if ping2 < 500 then
-   lo2:Set("PING : Normal 🟠")
-   else 
-    if ping2 < 888 then
-    lo2:Set("PING : Weak 🛑")
-    else 
-      if ping2 < 1000 then
-      lo2:Set("PING : Bad ⛔")
-      else 
-       if ping2 < 1500 then
-       lo2:Set("PING : Be careful ⚠️")
-       wait(10)
-       else 
-        lo2:Set("PING : ?????? 💀")
-       end
-      end
-    end
-   end
-  end
-  
-            end)
-        end
-    end)
     
 
 local t66 = t6:AddSection({"Animation R15"})
@@ -2483,6 +2472,24 @@ t7:AddButton({"Esp Map", function()
   run("https://pastebin.com/e5tMrV7y")
 end})
 
+local esp1 = t7:AddToggle({
+  Name = "Character Highlight",
+  Default = false
+})
+
+esp1:Callback(function(state)
+spam()
+  getgenv().enabled = state --Toggle on/off
+getgenv().filluseteamcolor = true --Toggle fill color using player team color on/off
+getgenv().outlineuseteamcolor = true --Toggle outline color using player team color on/off
+getgenv().fillcolor = Color3.new(0, 0, 0) --Change fill color, no need to edit if using team color
+getgenv().outlinecolor = Color3.new(1, 1, 1) --Change outline color, no need to edit if using team color
+getgenv().filltrans = 0.5 --Change fill transparency
+getgenv().outlinetrans = 0.5 --Change outline transparency
+
+loadstring(game:HttpGet("https://pastebin.com/raw/MBrkLzCp"))()
+end)
+
 local function getPlayerByName(playerName)
     for _, player in ipairs(game.Players:GetPlayers()) do
         if player.Name:lower() == playerName:lower() then
@@ -2497,9 +2504,12 @@ t8:AddTextBox({
   Description = "Enter Name",
   Default = "",
   Callback = function(Value)
-    Username=Value
+    Username = Value
+    Target = Value
   end
 })
+
+local wi = t8:AddSection({"Please fill in your full name correctly."})
 
 t8:AddButton({"Goto", function()
 spam()
@@ -2776,6 +2786,38 @@ for _,x in next, Targets do
 end
 end})
 
+
+t8:AddButton({"Fling", function()
+spam()
+
+game.Players.LocalPlayer.Character.Humanoid.Name = 1
+local l = game.Players.LocalPlayer.Character["1"]:Clone()
+l.Parent = game.Players.LocalPlayer.Character
+l.Name = "Humanoid"
+wait()
+game.Players.LocalPlayer.Character["1"]:Destroy()
+game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+game.Players.LocalPlayer.Character.Animate.Disabled = true
+wait()
+game.Players.LocalPlayer.Character.Animate.Disabled = false
+game.Players.LocalPlayer.Character.Humanoid.DisplayDistanceType = "None"
+for i,v in pairs(game:GetService'Players'.LocalPlayer.Backpack:GetChildren())do
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+end
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Target].Character.HumanoidRootPart.CFrame
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Target].Character.HumanoidRootPart.CFrame
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(-100000,1000000000000000000000,-100000))
+wait()
+local prt=Instance.new("Model", workspace);
+Instance.new("Part", prt).Name="Torso";
+Instance.new("Part", prt).Name="Head";
+Instance.new("Humanoid", prt).Name="Humanoid";
+game.Players.LocalPlayer.Character=prt
+end})
+
 t8:AddButton({"Fling All", function()
 spam()
 	local Targets = {"All"} -- "All", "Target Name", "arian_was_here"
@@ -3035,6 +3077,8 @@ spam()
   run2("20")
 end})
 
+run("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/raw.txt")
+
 t10:AddButton({"Buy Premium 80 Robux = 1.15$", function()
 spam()
   copy("https://www.roblox.com/game-pass/928623162/Blue-Mod-Premium")
@@ -3207,6 +3251,83 @@ spam()
   getgenv().NotiLevae = s
 end)
 
+local TimeSpam1 = 0  -- នាទី
+local TimeSpam2 = 0 -- វិនាទី
+local TimeSpam3 = 0 -- ម៉ោង
+
+getgenv().update = true
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if update == true then
+            pcall(function()
+                 local parts = workspace:GetPartBoundsInRadius(player.Character:WaitForChild("HumanoidRootPart").Position, 10)
+    for _, part in ipairs(parts) do
+        part.CanTouch = myzaza  -- Enable or disable 'CanTouch' based on 'myzaza' state
+    end
+                t01:Set("You Age [ "..game.Players.LocalPlayer.AccountAge.." Day".." ]")
+                t03:Set("Game ID [ "..game.PlaceId.." ]")
+                fps = math.floor(workspace:GetRealPhysicsFPS())
+                ping1 = tonumber(game:GetService("Stats"):FindFirstChild("PerformanceStats").Ping:GetValue())
+                ping2 = math.floor(ping1)
+                FPSSACN = "NOT"
+                age = game.Players.LocalPlayer.AccountAge
+                t02:Set("You FPS [ "..math.floor(workspace:GetRealPhysicsFPS()).." ]")
+                t04:Set("You Ping [ "..game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString().." ]")
+                t05:Set("Player In Server [ "..#game.Players:GetPlayers().." / "..game.Players.MaxPlayers.." ]")
+                t07:Set("Now Time [ "..os.date("%X").." ]")
+                cs2:Set("Health : "..game.Players.LocalPlayer.Character.Humanoid.Health)
+                TextLabel1.Text = game.Players.LocalPlayer.Character.Humanoid.Health.."%"
+                if fps > 59 then
+  lo1:Set("FPS : Good 🟢")
+  FPSSACN = "Good 🟢"
+  else 
+   if fps > 30 then
+   lo1:Set("FPS : Normal 🟠")
+   FPSSACN = "Normal 🟠"
+   else 
+    if fps > 19 then
+    lo1:Set("FPS : Weak 🔴")
+    FPSSACN = "Weak ??"
+    else 
+      if fps > 10 then
+      lo1:Set("FPS : Bed ⛔")
+      FPSSACN = "Bed ⛔"
+      else 
+       if fps > 5 then
+       lo1:Set("FPS : Be careful ⚠️")
+       FPSSACN = "Be careful ⚠️"
+       end
+      end
+    end
+   end
+  end
+  
+if ping2 < 300 then
+  lo2:Set("PING : Good 🟢")
+  else 
+   if ping2 < 500 then
+   lo2:Set("PING : Normal 🟠")
+   else 
+    if ping2 < 888 then
+    lo2:Set("PING : Weak 🛑")
+    else 
+      if ping2 < 1000 then
+      lo2:Set("PING : Bad ⛔")
+      else 
+       if ping2 < 1500 then
+       lo2:Set("PING : Be careful ⚠️")
+       wait(10)
+       else 
+        lo2:Set("PING : ?????? 💀")
+       end
+      end
+    end
+   end
+  end
+  
+            end)
+        end
+    end)
+
 while true do
     TimeSpam2 = TimeSpam2 + 1
     if TimeSpam2 == 60 then
@@ -3221,36 +3342,16 @@ while true do
     wait(1)
 end
 
+noti2("Loaded ✓, It's working.")
 
-local Players = game:GetService("Players")
-local StarterGui = game:GetService("StarterGui")
-local HttpService = game:GetService("HttpService")
-
-
-local gamePassURL = "https://raw.githubusercontent.com/Bysuskhmerops62/Game-Pass/refs/heads/main/OwnerPass%2080%20Robux"
-
-
-local gamePassOwners = {}
-local success, response = pcall(function()
-    return HttpService:GetAsync(gamePassURL)
-end)
-
-if success then
-    gamePassOwners = loadstring("return " .. response)()
-else
-    
 end
 
-local function checkGamePass(player)
-    local userId = player.UserId
-    local hasGamePass = gamePassOwners[userId] or false -- ពិនិត្យថាអ្នកលេងមាន Game Pass ទេ
+ 
 
-    local propass = hasGamePass and "Yes" or "No"
+wait(0.1)
 
-    noti2("Loaded ✓, It's working.")
-end
 
-checkGamePass(game:GetService("Players").LocalPlayer)
+MAIN1()
 
 local StarterGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
@@ -3266,11 +3367,3 @@ local Players = game:GetService("Players")
 Players.PlayerRemoving:Connect(function(player)
 		noti2(player.Name .. " has levae the game!", "Age : ", player)
 end)
-
-end
- 
-
-wait(1)
-
-
-MAIN1()
