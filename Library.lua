@@ -9,22 +9,20 @@ local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 local font = Enum.Font.Legacy
 local ta = 0.5
-local textSize = 15
-local FolderNamwSave = "Synapse Library.json"
 
-local synapse = {
+local redzlib = {
 	Themes = {
-		LighgV2 = {
-	["Color Hub 1"] = ColorSequence.new({
-		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)), -- White
-		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(200, 200, 200)), -- Light Grey
-		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(200, 200, 200))  -- Light Grey
-	}),
-	["Color Hub 2"] = Color3.fromRGB(200, 200, 200), -- Light Grey for buttons
-	["Color Stroke"] = Color3.fromRGB(173, 107, 204), -- Purple
-	["Color Theme"] = Color3.fromRGB(245, 245, 245), -- Background: Soft Grey
-	["Color Text"] = Color3.fromRGB(0, 0, 0), -- Black for better contrast
-	["Color Dark Text"] = Color3.fromRGB(50, 50, 50) -- Dark Grey
+		Blue = {
+			["Color Hub 1"] = ColorSequence.new({
+				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
+				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 166)),
+				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 166))
+			}),
+			["Color Hub 2"] = Color3.fromRGB(0, 0, 166),
+			["Color Stroke"] = Color3.fromRGB(0, 0, 255),
+			["Color Theme"] = Color3.fromRGB(0, 0, 0),
+			["Color Text"] = Color3.fromRGB(255, 255, 255),
+			["Color Dark Text"] = Color3.fromRGB(255, 255, 255)
 		},
 		Red = {
 			["Color Hub 1"] = ColorSequence.new({
@@ -39,25 +37,25 @@ local synapse = {
 			["Color Dark Text"] = Color3.fromRGB(255, 255, 255)
 		},
 		RedV2 = {
-			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)),
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))
-			}),
-			["Color Hub 2"] = Color3.fromRGB(156, 0, 1),
-			["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-			["Color Theme"] = Color3.fromRGB(150, 0, 255),
-			["Color Text"] = Color3.fromRGB(240, 240, 240),
-			["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
-		}
+    ["Color Hub 1"] = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(30, 30, 35)),  -- Darker color for background
+        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(50, 50, 50)),  -- Slightly lighter for middle area
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(30, 30, 35))   -- Darker color for background
+    }),
+    ["Color Hub 2"] = Color3.fromRGB(120, 0, 0),  -- Dark red for accent
+    ["Color Stroke"] = Color3.fromRGB(60, 60, 60),  -- Dark gray for stroke
+    ["Color Theme"] = Color3.fromRGB(80, 0, 160),  -- Dark purple for theme
+    ["Color Text"] = Color3.fromRGB(255, 255, 255),  -- White for text
+    ["Color Dark Text"] = Color3.fromRGB(180, 180, 180)  -- Light gray for dark text
+}
 	},
 	Info = {
-		Version = "1.1.1"
+		Version = "1.1.0"
 	},
 	Save = {
 		UISize = {550, 380},
 		TabSize = 160,
-		Theme = "LighgV2"
+		Theme = "RedV2"
 	},
 	Settings = {},
 	Connection = {},
@@ -72,12 +70,12 @@ local synapse = {
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 450
 
-local Settings = synapse.Settings
-local Flags = synapse.Flags
+local Settings = redzlib.Settings
+local Flags = redzlib.Flags
 
 local SetProps, SetChildren, InsertTheme, Create do
 	InsertTheme = function(Instance, Type)
-		table.insert(synapse.Instances, {
+		table.insert(redzlib.Instances, {
 			Instance = Instance,
 			Type = Type
 		})
@@ -126,14 +124,14 @@ local SetProps, SetChildren, InsertTheme, Create do
 			local decode = HttpService:JSONDecode(readfile(file))
 			
 			if type(decode) == "table" then
-				if rawget(decode, "UISize") then synapse.Save["UISize"] = decode["UISize"] end
-				if rawget(decode, "TabSize") then synapse.Save["TabSize"] = decode["TabSize"] end
-				if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then synapse.Save["Theme"] = decode["Theme"] end
+				if rawget(decode, "UISize") then redzlib.Save["UISize"] = decode["UISize"] end
+				if rawget(decode, "TabSize") then redzlib.Save["TabSize"] = decode["TabSize"] end
+				if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then redzlib.Save["Theme"] = decode["Theme"] end
 			end
 		end
 	end
 	
-	pcall(Save, FolderNamwSave)
+	pcall(Save, "Synapse.json")
 end
 
 local Funcs = {} do
@@ -193,7 +191,7 @@ local Funcs = {} do
 	end
 end
 
-local Connections, Connection = {}, synapse.Connection do
+local Connections, Connection = {}, redzlib.Connection do
 	local function NewConnectionList(List)
 		if type(List) ~= "table" then return end
 		
@@ -275,21 +273,13 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "core",
+	Name = "Synapse",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
 		Name = "Scale"
 	})
 })
-
-function synapse:ToggleUI()
-	if game.CoreGui[ScreenGui.Name].Enabled then
-		game.CoreGui[ScreenGui.Name].Enabled = false
-	else
-		game.CoreGui[ScreenGui.Name].Enabled = true
-	end
-end
 
 local ScreenFind = CoreGui:FindFirstChild(ScreenGui.Name)
 if ScreenFind and ScreenFind ~= ScreenGui then
@@ -339,7 +329,10 @@ local function MakeDrag(Instance)
 		local DragStart, StartPos, InputOn
 		
 		local function Update(Input)
-			
+			local delta = Input.Position - DragStart
+			local Position = UDim2.new(StartPos.X.Scale, StartPos.X.Offset + delta.X / UIScale, StartPos.Y.Scale, StartPos.Y.Offset + delta.Y / UIScale)
+			-- Instance.Position = Position
+			CreateTween({Instance, "Position", Position, 0.35})
 		end
 		
 		Instance.MouseButton1Down:Connect(function()
@@ -364,7 +357,7 @@ local function MakeDrag(Instance)
 end
 
 local function VerifyTheme(Theme)
-	for name,_ in pairs(synapse.Themes) do
+	for name,_ in pairs(redzlib.Themes) do
 		if name == Theme then
 			return true
 		end
@@ -378,14 +371,14 @@ local function SaveJson(FileName, save)
 	end
 end
 
-local Theme = synapse.Themes[synapse.Save.Theme]
+local Theme = redzlib.Themes[redzlib.Save.Theme]
 
 local function AddEle(Name, Func)
-	synapse.Elements[Name] = Func
+	redzlib.Elements[Name] = Func
 end
 
 local function Make(Ele, Instance, props, ...)
-	local Element = synapse.Elements[Ele](Instance, props, ...)
+	local Element = redzlib.Elements[Ele](Instance, props, ...)
 	return Element
 end
 
@@ -445,7 +438,7 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 		AnchorPoint = Vector2.new(0, 0.5),
 		BackgroundTransparency = 1,
 		TextTruncate = "AtEnd",
-		TextSize = textSize,
+		TextSize = 15,
 		TextXAlignment = "Left",
 		Text = "",
 		RichText = true
@@ -459,7 +452,7 @@ local function ButtonFrame(Instance, Title, Description, HolderSize)
 		Position = UDim2.new(0, 12, 0, 15),
 		BackgroundTransparency = 1,
 		TextWrapped = true,
-		TextSize = textSize,
+		TextSize = 13,
 		TextXAlignment = "Left",
 		Text = "",
 		RichText = true
@@ -532,17 +525,17 @@ local function GetColor(Instance)
 end
 
 -- /////////// --
-function synapse:GetIcon(IconName)
+function redzlib:GetIcon(IconName)
 	if IconName:find("rbxassetid://") or IconName:len() < 1 then return IconName end
 	IconName = IconName:lower():gsub("lucide", ""):gsub("-", "")
 	
-	for Name, Icon in pairs(synapse.Icons) do
+	for Name, Icon in pairs(redzlib.Icons) do
 		Name = Name:gsub("lucide", ""):gsub("-", "")
 		if Name == IconName then
 			return Icon
 		end
 	end
-	for Name, Icon in pairs(synapse.Icons) do
+	for Name, Icon in pairs(redzlib.Icons) do
 		Name = Name:gsub("lucide", ""):gsub("-", "")
 		if Name:find(IconName) then
 			return Icon
@@ -551,15 +544,15 @@ function synapse:GetIcon(IconName)
 	return IconName
 end
 
-function synapse:SetTheme(NewTheme)
+function redzlib:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
-	synapse.Save.Theme = NewTheme
-	SaveJson(FolderNamwSave, synapse.Save)
-	Theme = synapse.Themes[NewTheme]
+	redzlib.Save.Theme = NewTheme
+	SaveJson("BYSUSKHMER LIBRARY.json", redzlib.Save)
+	Theme = redzlib.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
-	table.foreach(synapse.Instances, function(_,Val)
+	table.foreach(redzlib.Instances, function(_,Val)
 		if Val.Type == "Gradient" then
 			Val.Instance.Color = Theme["Color Hub 1"]
 		elseif Val.Type == "Frame" then
@@ -578,12 +571,12 @@ function synapse:SetTheme(NewTheme)
 	end)
 end
 
-function synapse:SetScale(NewScale)
+function redzlib:SetScale(NewScale)
 	NewScale = ViewportSize.Y / math.clamp(NewScale, 300, 2000)
 	UIScale, ScreenGui.Scale.Scale = NewScale, NewScale
 end
 
-function synapse:MakeWindow(Configs)
+function redzlib:MakeWindow(Configs)
 	local WTitle = Configs[1] or Configs.Name or Configs.Title or "Blue Mod"
 	local WMiniText = Configs[2] or Configs.SubTitle or "by : Bysuskhmer"
 	
@@ -605,7 +598,7 @@ function synapse:MakeWindow(Configs)
 		end
 	end;LoadFile()
 	
-	local UISizeX, UISizeY = unpack(synapse.Save.UISize)
+	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
@@ -638,7 +631,7 @@ function synapse:MakeWindow(Configs)
 		AutomaticSize = "XY",
 		Text = WTitle,
 		TextXAlignment = "Left",
-		TextSize = textSize,
+		TextSize = 15,
 		TextColor3 = Theme["Color Text"],
 		BackgroundTransparency = 1,
 		Font = font,
@@ -654,14 +647,14 @@ function synapse:MakeWindow(Configs)
 			BackgroundTransparency = 1,
 			TextXAlignment = "Left",
 			TextYAlignment = "Bottom",
-			TextSize = textSize,
+			TextSize = 15,
 			Font = font,
 			Name = "SubTitle"
 		}), "DarkText")
 	}), "Text")
 	
 	local MainScroll = InsertTheme(Create("ScrollingFrame", Components, {
-		Size = UDim2.new(0, synapse.Save.TabSize, 1, -TopBar.Size.Y.Offset),
+		Size = UDim2.new(0, redzlib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
 		ScrollBarImageColor3 = Theme["Color Theme"],
 		Position = UDim2.new(0, 0, 1, 0),
 		AnchorPoint = Vector2.new(0, 1),
@@ -710,17 +703,28 @@ function synapse:MakeWindow(Configs)
 	}))
 	
 	local function ControlSize()
+		local Pos1, Pos2 = ControlSize1.Position, ControlSize2.Position
+		ControlSize1.Position = UDim2.fromOffset(math.clamp(Pos1.X.Offset, 430, 1000), math.clamp(Pos1.Y.Offset, 200, 500))
+		ControlSize2.Position = UDim2.new(0, math.clamp(Pos2.X.Offset, 135, 250), 1, 0)
 		
+		MainScroll.Size = UDim2.new(0, ControlSize2.Position.X.Offset, 1, -TopBar.Size.Y.Offset)
+		Containers.Size = UDim2.new(1, -MainScroll.Size.X.Offset, 1, -TopBar.Size.Y.Offset)
+		MainFrame.Size = ControlSize1.Position
 	end
 	
 	ControlSize1:GetPropertyChangedSignal("Position"):Connect(ControlSize)
 	ControlSize2:GetPropertyChangedSignal("Position"):Connect(ControlSize)
 	
 	ConnectSave(ControlSize1, function()
-		
+		if not Minimized then
+			redzlib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
+			SaveJson("BYSUSKHMER LIBRARY.json", redzlib.Save)
+		end
 	end)
 	
 	ConnectSave(ControlSize2, function()
+		redzlib.Save.TabSize = MainScroll.Size.X.Offset
+		SaveJson("Synapse.json", redzlib.Save)
 	end)
 	
 	local ButtonsFolder = Create("Folder", TopBar, {
@@ -835,7 +839,7 @@ function synapse:MakeWindow(Configs)
 				Text = DTitle,
 				TextXAlignment = "Left",
 				TextColor3 = Theme["Color Text"],
-				TextSize = textSize,
+				TextSize = 15,
 				Position = UDim2.fromOffset(15, 5),
 				BackgroundTransparency = 1
 			}), "Text"),
@@ -846,7 +850,7 @@ function synapse:MakeWindow(Configs)
 				Text = DText,
 				TextXAlignment = "Left",
 				TextColor3 = Theme["Color Dark Text"],
-				TextSize = textSize,
+				TextSize = 15,
 				Position = UDim2.fromOffset(15, 25),
 				BackgroundTransparency = 1,
 				TextWrapped = true
@@ -895,7 +899,7 @@ function synapse:MakeWindow(Configs)
 				Text = Name,
 				Font = font,
 				TextColor3 = Theme["Color Text"],
-				TextSize = textSize
+				TextSize = 15
 			})
 			
 			for _,Button in pairs(ButtonsHolder:GetChildren()) do
@@ -919,9 +923,9 @@ function synapse:MakeWindow(Configs)
 	end
 	function Window:SelectTab(TabSelect)
 		if type(TabSelect) == "number" then
-			synapse.Tabs[TabSelect].func:Enable()
+			redzlib.Tabs[TabSelect].func:Enable()
 		else
-			for _,Tab in pairs(synapse.Tabs) do
+			for _,Tab in pairs(redzlib.Tabs) do
 				if Tab.Cont == TabSelect.Cont then
 					Tab.func:Enable()
 				end
@@ -935,7 +939,7 @@ function synapse:MakeWindow(Configs)
 		local TName = Configs[1] or Configs.Title or "Tab!"
 		local TIcon = Configs[2] or Configs.Icon or ""
 		
-		TIcon = synapse:GetIcon(TIcon)
+		TIcon = redzlib:GetIcon(TIcon)
 		if not TIcon:find("rbxassetid://") or TIcon:gsub("rbxassetid://", ""):len() < 6 then
 			TIcon = false
 		end
@@ -951,7 +955,7 @@ function synapse:MakeWindow(Configs)
 			Font = font,
 			Text = TName,
 			TextColor3 = Theme["Color Text"],
-			TextSize = textSize,
+			TextSize = 14,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTransparency = (FirstTab and 0.3) or 0,
 			TextTruncate = "AtEnd"
@@ -1011,7 +1015,7 @@ function synapse:MakeWindow(Configs)
 			end
 			Container.Parent = Containers
 			Container.Size = UDim2.new(1, 0, 1, 150)
-			table.foreach(synapse.Tabs, function(_,Tab)
+			table.foreach(redzlib.Tabs, function(_,Tab)
 				if Tab.Cont ~= Container then
 					Tab.func:Disable()
 				end
@@ -1026,7 +1030,7 @@ function synapse:MakeWindow(Configs)
 		
 		FirstTab = true
 		local Tab = {}
-		table.insert(synapse.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
+		table.insert(redzlib.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
 		Tab.Cont = Container
 		
 		function Tab:Disable()
@@ -1062,12 +1066,12 @@ function synapse:MakeWindow(Configs)
 				Position = UDim2.new(0, 5),
 				BackgroundTransparency = 1,
 				TextTruncate = "AtEnd",
-				TextSize = textSize,
+				TextSize = 15,
 				TextXAlignment = "Left"
 			}), "Text")
 			
 			local Section = {}
-			table.insert(synapse.Options, {type = "Section", Name = SectionName, func = Section})
+			table.insert(redzlib.Options, {type = "Section", Name = SectionName, func = Section})
 			function Section:Visible(Bool)
 				if Bool == nil then SectionFrame.Visible = not SectionFrame.Visible return end
 				SectionFrame.Visible = Bool
@@ -1340,7 +1344,15 @@ function synapse:MakeWindow(Configs)
 			end
 			
 			local function CalculatePos()
+				local FramePos = SelectedFrame.AbsolutePosition
+				local ScreenSize = ScreenGui.AbsoluteSize
+				local ClampX = math.clamp((FramePos.X / UIScale), 0, ScreenSize.X / UIScale - DropFrame.Size.X.Offset)
+				local ClampY = math.clamp((FramePos.Y / UIScale) , 0, ScreenSize.Y / UIScale)
 				
+				local NewPos = UDim2.fromOffset(ClampX, ClampY)
+				local AnchorPoint = FramePos.Y > ScreenSize.Y / 1.4 and 1 or ScrollSize > 80 and 0.5 or 0
+				DropFrame.AnchorPoint = Vector2.new(0, AnchorPoint)
+				CreateTween({DropFrame, "Position", NewPos, 0.1})
 			end
 			
 			local AddNewOptions, GetOptions, AddOption, RemoveOption, Selected do
@@ -1604,7 +1616,7 @@ function synapse:MakeWindow(Configs)
 				BackgroundTransparency = 1,
 				TextColor3 = Theme["Color Text"],
 				Font = font,
-				TextSize = textSize
+				TextSize = 15
 			}), "Text")
 			
 			local UIScale = Create("UIScale", LabelVal)
@@ -1772,7 +1784,7 @@ function synapse:MakeWindow(Configs)
 				Font = font,
 				TextXAlignment = "Left",
 				BackgroundTransparency = 1,
-				TextSize = textSize,
+				TextSize = 15,
 				Text = Invite
 			})
 			
@@ -1797,7 +1809,7 @@ function synapse:MakeWindow(Configs)
 				TextColor3 = Theme["Color Text"],
 				TextXAlignment = "Left",
 				BackgroundTransparency = 1,
-				TextSize = textSize,
+				TextSize = 15,
 				Text = Title
 			}), "Text")
 			
@@ -1810,7 +1822,7 @@ function synapse:MakeWindow(Configs)
 				TextColor3 = Theme["Color Dark Text"],
 				TextXAlignment = "Left",
 				BackgroundTransparency = 1,
-				TextSize = textSize,
+				TextSize = 14,
 				Text = Desc
 			}), "DarkText")
 			
@@ -1820,7 +1832,7 @@ function synapse:MakeWindow(Configs)
 				Position = UDim2.new(0.5, 0, 1, -7),
 				Text = "Join",
 				Font = font,
-				TextSize = textSize,
+				TextSize = 15,
 				TextColor3 = Color3.fromRGB(220, 220, 220),
 				BackgroundColor3 = Color3.fromRGB(50, 150, 50)
 			})Make("Corner", JoinButton, UDim.new(0, 5))
@@ -1856,4 +1868,4 @@ function synapse:MakeWindow(Configs)
 	return Window
 end
 
-return synapse
+return redzlib
