@@ -6,6 +6,91 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 })
 end
 
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+screenGui.ResetOnSpawn = false
+
+-- Create Full-Screen Loading Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(1, 0, 1, 0) -- Full-screen
+frame.Position = UDim2.new(0, 0, 0, 0)
+frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+frame.BackgroundTransparency = 0.2
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+frame.Visible = false
+
+-- Create UI Corner (Rounded)
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 10)
+corner.Parent = frame
+
+-- Create Loading Label
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(0.6, 0, 0.15, 0)
+textLabel.Position = UDim2.new(0.2, 0, 0.45, 0)
+textLabel.Text = "Loading..."
+textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+textLabel.Font = Enum.Font.GothamBold
+textLabel.TextSize = 24
+textLabel.BackgroundTransparency = 1
+textLabel.TextScaled = true
+textLabel.Parent = frame
+
+-- Create Animated Loading Bar
+local loadingBar = Instance.new("Frame")
+loadingBar.Size = UDim2.new(0.7, 0, 0.05, 0)
+loadingBar.Position = UDim2.new(0.15, 0, 0.6, 0)
+loadingBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+loadingBar.BackgroundTransparency = 0.7
+loadingBar.Parent = frame
+
+local barFill = Instance.new("Frame")
+barFill.Size = UDim2.new(0, 0, 1, 0)
+barFill.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+barFill.Parent = loadingBar
+
+-- Create UI Corner for Loading Bar
+local barCorner = Instance.new("UICorner")
+barCorner.CornerRadius = UDim.new(0, 8)
+barCorner.Parent = loadingBar
+
+local fillCorner = Instance.new("UICorner")
+fillCorner.CornerRadius = UDim.new(0, 8)
+fillCorner.Parent = barFill
+
+-- Function to Show Notification with Animation
+local function showNotification(message, duration)
+    textLabel.Text = message
+    frame.Visible = true
+
+    -- Animate Loading Bar Fill
+    local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+    local tween = TweenService:Create(barFill, tweenInfo, {Size = UDim2.new(1, 0, 1, 0)})
+    tween:Play()
+
+    -- Wait for Loading Time
+    tween.Completed:Wait()
+    
+    -- Fade Out Animation
+    local fadeOut = TweenService:Create(frame, TweenInfo.new(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1})
+    fadeOut:Play()
+    
+    fadeOut.Completed:Wait()
+    frame.Visible = false
+    frame.BackgroundTransparency = 0.2 -- Reset transparency
+    barFill.Size = UDim2.new(0, 0, 1, 0) -- Reset loading bar
+end
+
+-- Example: Show Loading Screen
+task.wait(2)
+showNotification("Welcome to the Script! Please wait (10-20) Seconds!", 10)
+
 local function isNumber(str)
   if tonumber(str) ~= nil or str == 'inf' then
     return true
@@ -65,15 +150,11 @@ end
 
 id("17819405673")
 	
-function title(message,color)
-	game.StarterGui:SetCore("ChatMakeSystemMessage", {
-		Text = message,
-		Color = Color3.fromRGB(255,255,255),
-		Font = Enum.Font.Michroma,
-		TextSize = 18,})
+function title(message)
+	
 end
 
-title("Anti Kick ban Loaded", "old")
+title("Anti Kick ban Loaded")
 	
 local function partgoto(partname)
 	
@@ -528,7 +609,7 @@ local sound = Instance.new("Sound")
 end
 
 function run2(exe)
-Notification.new("message", "Co-crypto is running", "Script Create By @Ghost Player")
+showNotification("Script Runn", 3)
 wait(1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/Ghost%20Player%20Url.Api.lua.txt"))()execute("Script"..exe)
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
@@ -540,10 +621,12 @@ end
 
 
 function run(script)
-
+showNotification("Script Load pls wait", 3)
 spam()
 loadstring(game:HttpGet(script))()
 getgenv().ah = false
+wait(1)
+
 game.StarterGui:SetCore("ChatMakeSystemMessage", {
 		Text = "You have run a script.",
 		Color = Color3.fromRGB(255,255,255),
@@ -700,7 +783,7 @@ Toggle.MouseButton1Click:Connect(function()
     end
 
     spam()
-    synapse:ToggleUI()
+    Window:MinimizeBtn()
 end)
 
 local ScreenGui1 = Instance.new("ScreenGui") 
@@ -1763,6 +1846,19 @@ t4:AddButton({"Touch Fling GUi", function()
   run("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI")
 end})
 
+local gsgs = t4:AddSection({"Script 18+"})
+
+t4:AddButton({"18+ V1(work R6)", function()
+  loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))("Spider Script")
+end})
+
+
+local gsgs = t4:AddSection({"Fling Hot"})
+
+t4:AddButton({"SCP -096", function()
+  loadstring(game:HttpGet("https://pastefy.app/YsJgITXR/raw"))()
+end})
+
 local pg1 = t5:AddSection({"Create a Cart Ride"})
 
 t5:AddButton({"Create a Cart Ride(HydraX)", function()
@@ -1995,114 +2091,6 @@ local pg1 = t5:AddSection({"zombie uprising"})
 t5:AddButton({"zombie uprising (Unknownproooolucky)", function()
   run("https://raw.githubusercontent.com/Unknownproooolucky/Unknown-Hub-X-Universal-Games/main/Games/Zombie-Uprising")
 end})
-
-local UserInputService = game:GetService("UserInputService")
-
-if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
-	device = "Mobile device"
-	devi = Mobile
-elseif not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled then
-	device = "Computer device"
-	devi = PC
-end
-
-local ex = t0:AddSection({"You Play : "})
-
-t0:AddDiscordInvite({
-  Name = "Synapse  | GROUP",
-  Logo = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png",
-  Invite = "https://t.me/+FzzOkyT1kcU4MzRl"
-})
-
-local t00 = t0:AddSection({"Game Data"})
-
-local t00 = t0:AddSection({"Game Clock : "..game:GetService("Lighting").ClockTime})
-
-local cs2 = t0:AddSection({"Health : "..game.Players.LocalPlayer.Character.Humanoid.Health})
-
-local t00 = t0:AddSection({"You Profile"})
-
-local t01 = t0:AddSection({"You Age [ "..game.Players.LocalPlayer.AccountAge.." ]"})
-
-local t08 = t0:AddSection({"You Name [ "..game.Players.LocalPlayer.Name.." ]"})
-
-t0:AddButton({"COPY", function()
-spam()
-  copy(game.Players.LocalPlayer.Name)
-end})
-
-local pol = t0:AddSection({"You Display Name [ "..game.Players.LocalPlayer.DisplayName.." ]"})
-
-t0:AddButton({"COPY", function()
-spam()
-  copy(game.Players.LocalPlayer.DisplayName)
-end})
-
-local apis = t0:AddSection({"You User ID [ "..game.Players.LocalPlayer.UserId.." ]"})
-
-t0:AddButton({"COPY", function()
-spam()
-  copy(game.Players.LocalPlayer.UserId)
-end})
-
-local youID = game.Players.LocalPlayer.UserId
-
-local t02 = t0:AddSection({"You FPS [ "..math.floor(workspace:GetRealPhysicsFPS()).." ]"})
-
-local t04 = t0:AddSection({"You Ping [ "..game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString().." ]"})
-
-local t05 = t0:AddSection({"Player In Server [ "..#game.Players:GetPlayers().." / "..game.Players.MaxPlayers.." ]"})
-
-local t07 = t0:AddSection({"Now Time [ "..os.date("%X").." ]"})
-
-local t03 = t0:AddSection({"Game ID [ "..game.PlaceId.." ]"})
-
-t0:AddButton({"COPY", function()
-spam()
-  copy(game.PlaceId)
-end})
-
-local pol = t0:AddSection({"Game Name [ "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." ]"})
-
-t0:AddButton({"COPY", function()
-spam()
-  copy(game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
-end})
-
-local pol = t0:AddSection({"Game Job Id [ "..game.JobId.." ]"})
-
-t0:AddButton({"COPY", function()
-spam()
-  copy(game.JobId)
-end})
-
-local pol = t0:AddSection({"IPAdress [ "..IP.ip.." ]"})
-
-t0:AddButton({"COPY", function()
-spam()
-  copy(IP.ip)
-end})
-
-local pol = t0:AddSection({"Continent [ "..IP.continent.." ]"})
-
-local pol = t0:AddSection({"Continent [ "..IP.country.." ]"})
-
-local pol = t0:AddSection({"Flag [ "..IP.flag.emoji.." ]"})
-
-local pol = t0:AddSection({"Region [ "..IP.region.." ]"})
-
-local pol = t0:AddSection({"Capital [ "..IP.capital.." ]"})
-
-local pol = t0:AddSection({"City [ "..IP.city.." ]"})
-
-local pol = t0:AddSection({"Postal [ "..IP.postal.." ]"})
-
-local pol = t0:AddSection({"You User : "..device})
-
-local lo1 = t0:AddSection({"NO DATE"})
-
-local lo2 = t0:AddSection({"NO DATE"})
-    
 
 local t66 = t6:AddSection({"Animation R15"})
 
@@ -3251,82 +3239,65 @@ spam()
   getgenv().NotiLevae = s
 end)
 
+local devi = ""
+if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
+    device = "Mobile device"
+    devi = "Mobile"
+elseif not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled then
+    device = "Computer device"
+    devi = "PC"
+end
+
+local ex = t0:AddSection({"You Play : "})
+
+t0:AddDiscordInvite({
+  Name = "Synapse  | GROUP",
+  Logo = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png",
+  Invite = "https://t.me/+Bg3ix2oH_B1iZGM1"
+})
+
+local t00 = t0:AddSection({"Game Data"})
+
+local t00 = t0:AddSection({"Game Clock : "..game:GetService("Lighting").ClockTime})
+
+local cs2 = t0:AddSection({"Health : "..game.Players.LocalPlayer.Character.Humanoid.Health})
+
+local t00 = t0:AddSection({"You Profile"})
+
+local t01 = t0:AddSection({"You Age [ "..game.Players.LocalPlayer.AccountAge.." ]"})
+
+local t08 = t0:AddSection({"You Name [ "..game.Players.LocalPlayer.Name.." ]"})
+
+local youID = game.Players.LocalPlayer.UserId
+
+local t03 = t0:AddSection({"Game ID [ "..game.PlaceId.." ]"})
+
+t0:AddButton({"COPY", function()
+spam()
+  copy(game.PlaceId)
+end})
+
+local pol = t0:AddSection({"Game Name [ "..game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name.." ]"})
+
+t0:AddButton({"COPY", function()
+spam()
+  copy(game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
+end})
+
+local pol = t0:AddSection({"Game Job Id [ "..game.JobId.." ]"})
+
+t0:AddButton({"COPY", function()
+spam()
+  copy(game.JobId)
+end})
+
+local pol = t0:AddSection({"You User : "..device})
+
 local TimeSpam1 = 0  -- នាទី
 local TimeSpam2 = 0 -- វិនាទី
 local TimeSpam3 = 0 -- ម៉ោង
 
-getgenv().update = true
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if update == true then
-            pcall(function()
-                 local parts = workspace:GetPartBoundsInRadius(player.Character:WaitForChild("HumanoidRootPart").Position, 10)
-    for _, part in ipairs(parts) do
-        part.CanTouch = myzaza  -- Enable or disable 'CanTouch' based on 'myzaza' state
-    end
-                t01:Set("You Age [ "..game.Players.LocalPlayer.AccountAge.." Day".." ]")
-                t03:Set("Game ID [ "..game.PlaceId.." ]")
-                fps = math.floor(workspace:GetRealPhysicsFPS())
-                ping1 = tonumber(game:GetService("Stats"):FindFirstChild("PerformanceStats").Ping:GetValue())
-                ping2 = math.floor(ping1)
-                FPSSACN = "NOT"
-                age = game.Players.LocalPlayer.AccountAge
-                t02:Set("You FPS [ "..math.floor(workspace:GetRealPhysicsFPS()).." ]")
-                t04:Set("You Ping [ "..game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString().." ]")
-                t05:Set("Player In Server [ "..#game.Players:GetPlayers().." / "..game.Players.MaxPlayers.." ]")
-                t07:Set("Now Time [ "..os.date("%X").." ]")
-                cs2:Set("Health : "..game.Players.LocalPlayer.Character.Humanoid.Health)
-                TextLabel1.Text = game.Players.LocalPlayer.Character.Humanoid.Health.."%"
-                if fps > 59 then
-  lo1:Set("FPS : Good 🟢")
-  FPSSACN = "Good 🟢"
-  else 
-   if fps > 30 then
-   lo1:Set("FPS : Normal 🟠")
-   FPSSACN = "Normal 🟠"
-   else 
-    if fps > 19 then
-    lo1:Set("FPS : Weak 🔴")
-    FPSSACN = "Weak ??"
-    else 
-      if fps > 10 then
-      lo1:Set("FPS : Bed ⛔")
-      FPSSACN = "Bed ⛔"
-      else 
-       if fps > 5 then
-       lo1:Set("FPS : Be careful ⚠️")
-       FPSSACN = "Be careful ⚠️"
-       end
-      end
-    end
-   end
-  end
-  
-if ping2 < 300 then
-  lo2:Set("PING : Good 🟢")
-  else 
-   if ping2 < 500 then
-   lo2:Set("PING : Normal 🟠")
-   else 
-    if ping2 < 888 then
-    lo2:Set("PING : Weak 🛑")
-    else 
-      if ping2 < 1000 then
-      lo2:Set("PING : Bad ⛔")
-      else 
-       if ping2 < 1500 then
-       lo2:Set("PING : Be careful ⚠️")
-       wait(10)
-       else 
-        lo2:Set("PING : ?????? 💀")
-       end
-      end
-    end
-   end
-  end
-  
-            end)
-        end
-    end)
+showNotification("Script All Load Work", 2)
 
 while true do
     TimeSpam2 = TimeSpam2 + 1
@@ -3341,8 +3312,6 @@ while true do
     ex:Set("You Play : " .. TimeSpam3 .. " h " .. TimeSpam1 .. " m " .. TimeSpam2 .. " s ")
     wait(1)
 end
-
-noti2("Loaded ✓, It's working.")
 
 end
 
