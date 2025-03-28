@@ -1,3 +1,4 @@
+local function Datameun()
 function noti2(title,title2,player)
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = title, 
@@ -5,91 +6,6 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 	Icon = "https://www.roblox.com/headshot-thumbnail/image?userId=".. player.UserId .."&width=420&height=420&format=png" 
 })
 end
-
-local Players = game:GetService("Players")
-local TweenService = game:GetService("TweenService")
-local playerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
-
--- Create ScreenGui
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = playerGui
-screenGui.ResetOnSpawn = false
-
--- Create Full-Screen Loading Frame
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(1, 0, 1, 0) -- Full-screen
-frame.Position = UDim2.new(0, 0, 0, 0)
-frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-frame.BackgroundTransparency = 0.2
-frame.BorderSizePixel = 0
-frame.Parent = screenGui
-frame.Visible = false
-
--- Create UI Corner (Rounded)
-local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 10)
-corner.Parent = frame
-
--- Create Loading Label
-local textLabel = Instance.new("TextLabel")
-textLabel.Size = UDim2.new(0.6, 0, 0.15, 0)
-textLabel.Position = UDim2.new(0.2, 0, 0.45, 0)
-textLabel.Text = "Loading..."
-textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-textLabel.Font = Enum.Font.GothamBold
-textLabel.TextSize = 24
-textLabel.BackgroundTransparency = 1
-textLabel.TextScaled = true
-textLabel.Parent = frame
-
--- Create Animated Loading Bar
-local loadingBar = Instance.new("Frame")
-loadingBar.Size = UDim2.new(0.7, 0, 0.05, 0)
-loadingBar.Position = UDim2.new(0.15, 0, 0.6, 0)
-loadingBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-loadingBar.BackgroundTransparency = 0.7
-loadingBar.Parent = frame
-
-local barFill = Instance.new("Frame")
-barFill.Size = UDim2.new(0, 0, 1, 0)
-barFill.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
-barFill.Parent = loadingBar
-
--- Create UI Corner for Loading Bar
-local barCorner = Instance.new("UICorner")
-barCorner.CornerRadius = UDim.new(0, 8)
-barCorner.Parent = loadingBar
-
-local fillCorner = Instance.new("UICorner")
-fillCorner.CornerRadius = UDim.new(0, 8)
-fillCorner.Parent = barFill
-
--- Function to Show Notification with Animation
-local function showNotification(message, duration)
-    textLabel.Text = message
-    frame.Visible = true
-
-    -- Animate Loading Bar Fill
-    local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-    local tween = TweenService:Create(barFill, tweenInfo, {Size = UDim2.new(1, 0, 1, 0)})
-    tween:Play()
-
-    -- Wait for Loading Time
-    tween.Completed:Wait()
-    
-    -- Fade Out Animation
-    local fadeOut = TweenService:Create(frame, TweenInfo.new(0.7, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundTransparency = 1})
-    fadeOut:Play()
-    
-    fadeOut.Completed:Wait()
-    frame.Visible = false
-    frame.BackgroundTransparency = 0.2 -- Reset transparency
-    barFill.Size = UDim2.new(0, 0, 1, 0) -- Reset loading bar
-end
-
--- Example: Show Loading Screen
-task.wait(2)
-showNotification("Welcome to the Script! Please wait (10-20) Seconds!", 10)
 
 local function isNumber(str)
   if tonumber(str) ~= nil or str == 'inf' then
@@ -147,14 +63,10 @@ local song = Instance.new("Sound")
 	song.Parent = game:GetService("SoundService")
 	song:Play()
 end
-
-id("17819405673")
 	
 function title(message)
 	
 end
-
-title("Anti Kick ban Loaded")
 	
 local function partgoto(partname)
 	
@@ -180,17 +92,26 @@ moveToPart(game:GetService("Players").Players.LocalPlayer)
 	end
 
 local loadingCOLOR = Color3.new(255, 0, 0)
-local synapse = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/Synapse-/refs/heads/main/Library.lua"))()
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/Synapse-/refs/heads/main/Redzhubui.txt"))()
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/Synapse-/refs/heads/main/notification_gui_library.lua.txt", true))()
 local MessageBox = loadstring(game:HttpGet("https://pastebin.com/raw/kQSh53xc"))()
 
 function noti(t,x)
-Notification.new("message", t, x)
+
 end
 
 local function NACaller(pp)
 	local s,err=pcall(pp)
 	if not s then warn("NA script err: "..err) end
+end
+
+function FindInTable(tbl, val)
+    for _, v in pairs(tbl) do
+        if v == val then
+            return true
+        end
+    end
+    return false
 end
 
 local function flingplayer(name)
@@ -596,42 +517,27 @@ function Main22()
  end
 end
 
-function MAIN1()
 local IP = game.HttpService:JSONDecode(game:HttpGet("https://ipwho.is/"))
 local UserVersion = 1.6
 local CoreGui = game:GetService("StarterGui")
 
 function spam()
-local sound = Instance.new("Sound")
-	sound.SoundId = "rbxassetid://535716488"
-	sound.Parent = game:GetService("SoundService")
-	sound:Play()
+
 end
 
 function run2(exe)
-showNotification("Script Runn", 3)
+
 wait(1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/Ghost%20Player%20Url.Api.lua.txt"))()execute("Script"..exe)
-game.StarterGui:SetCore("ChatMakeSystemMessage", {
-		Text = "You have run a script.",
-		Color = Color3.fromRGB(255,255,255),
-		Font = Enum.Font.Michroma,
-		TextSize = 18,})
 end
 
 
 function run(script)
-showNotification("Script Load pls wait", 3)
+
 spam()
 loadstring(game:HttpGet(script))()
 getgenv().ah = false
 wait(1)
-
-game.StarterGui:SetCore("ChatMakeSystemMessage", {
-		Text = "You have run a script.",
-		Color = Color3.fromRGB(255,255,255),
-		Font = Enum.Font.Michroma,
-		TextSize = 18,})
 end
 
 function copy(text)
@@ -639,15 +545,22 @@ function copy(text)
  
  wait(0.5)
  
- Notification.new("message", "Copy Successful", "Message : "..text)
+ 
 end
 
 joingame = false
 
-local Window = synapse:MakeWindow({
-  Title = "Synapse | Universal V"..UserVersion,
-  SubTitle = "",
-  SaveFolder = "Synapse"
+local Window = redzlib:MakeWindow({
+  Title = "SynapseX | Universal V"..UserVersion,
+  SubTitle = "by bysuskhmer",
+  SaveFolder = "Synapse | Data.lua"
+})
+
+id("897997800")
+
+Window:AddMinimizeButton({
+    Button = { Image = "rbxassetid://106252463466449", BackgroundTransparency = 0 },
+    Corner = { CornerRadius = UDim.new(10, 1) },
 })
 
 getgenv().HitboxSize = 15
@@ -733,86 +646,20 @@ local function SendNotify(title, message, duration)
 	game:GetService("StarterGui"):SetCore("SendNotification", {Title = title,Text = message,Duration = duration;})
 end
 
-local t0 = Window:MakeTab({"Main", "lucide-home"})
-local t1 = Window:MakeTab({"Player", "lucide-user-plus"})
-local t2 = Window:MakeTab({"Hitbox", "lucide-inbox"})
-local t3 = Window:MakeTab({"Script", "lucide-library"})
-local t4 = Window:MakeTab({"Troll", "lucide-airplay"})
-local t5 = Window:MakeTab({"Game", "lucide-gamepad-2"})
-local t6 = Window:MakeTab({"Animation", "lucide-highlighter"})
-local t7 = Window:MakeTab({"Esp Library", "lucide-clipboard-x"})
-local t8 = Window:MakeTab({"Player List", "lucide-file-warning"})
-local t9 = Window:MakeTab({"Help", "lucide-info"})
-local t10 = Window:MakeTab({"Premium", "lucide-key"})
-local t11 = Window:MakeTab({"Other", "lucide-navigation"})
+local t0 = Window:MakeTab({"Main", ""})
+local t1 = Window:MakeTab({"Player", ""})
+local t2 = Window:MakeTab({"Hitbox", ""})
+local t3 = Window:MakeTab({"Script", ""})
+local t4 = Window:MakeTab({"Troll", ""})
+local t5 = Window:MakeTab({"Game", ""})
+local t6 = Window:MakeTab({"Animation", ""})
+local t7 = Window:MakeTab({"Esp Library", ""})
+local t8 = Window:MakeTab({"Player List", ""})
+local t9 = Window:MakeTab({"Help", ""})
+local t10 = Window:MakeTab({"Premium", ""})
+local t11 = Window:MakeTab({"Other", ""})
 
-local TweenService = game:GetService("TweenService")
-
-local ToggleGui = Instance.new("ScreenGui")
-local Toggle = Instance.new("ImageButton")
-
-ToggleGui.Name = "ToggleGui_HE"
-ToggleGui.Parent = game.CoreGui
-
-local ToggleOpen = true
-
-Toggle.Name = "Toggle"
-Toggle.Parent = ToggleGui
-Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Toggle.BackgroundTransparency = 1
-Toggle.Position = UDim2.new(1, -120, 0.4, 0)
-Toggle.Size = UDim2.new(0.05, 0, 0.114, 0)
-Toggle.Image = "rbxassetid://79267375061380"
-Toggle.Active = true
-Toggle.Draggable = true
-Toggle.Visible = true
-
-local function animateUI(targetObject, propertyTable, duration)
-    local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-    local tween = TweenService:Create(targetObject, tweenInfo, propertyTable)
-    tween:Play()
-end
-
-Toggle.MouseButton1Click:Connect(function()
-    ToggleOpen = not ToggleOpen
-
-    if ToggleOpen then
-        animateUI(Toggle, {Size = UDim2.new(0.07, 0, 0.14, 0)}, 0.3)
-    else
-        animateUI(Toggle, {Size = UDim2.new(0.05, 0, 0.114, 0)}, 0.3)
-    end
-
-    spam()
-    Window:MinimizeBtn()
-end)
-
-local ScreenGui1 = Instance.new("ScreenGui") 
-ScreenGui1.Parent = game.CoreGui
-ScreenGui1.Name = "h"
-
-local Frame1 = Instance.new("Frame") 
-Frame1.Parent = ScreenGui1
-Frame1.Name = "m"
-
-local TextLabel1 = Instance.new("TextLabel") 
-TextLabel1.Parent = ScreenGui1
-TextLabel1.Name = "text iew1"
-TextLabel1.BackgroundColor3 = Color3.fromRGB(0,255,0)
-TextLabel1.BackgroundTransparency = 0
-TextLabel1.BorderSizePixel = 1
-TextLabel1.BorderColor3 = Color3.fromRGB(0,255,0)
-TextLabel1.Position = UDim2.new(0,0,0)
-TextLabel1.Size = UDim2.new(0.08,0,0.1)
-TextLabel1.Font = Enum.Font.SciFi
-TextLabel1.TextColor3 = Color3.fromRGB(17,17,17)
-TextLabel1.Text = "Roblox.Get()%"
-TextLabel1.TextSize = 18
-TextLabel1.TextScaled = true
-TextLabel1.TextWrapped = true
-TextLabel1.TextYAlignment = Enum.TextYAlignment.Top
-TextLabel1.Visible = false
-TextLabel1.Active = true
-TextLabel1.Draggable = true
+Window:SelectTab(t1)
 
 t1:AddTextBox({
   Name = "Local Speed",
@@ -1082,7 +929,7 @@ end)
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local primaryPart = character:WaitForChild("HumanoidRootPart")
-getgenv().spinSpeedss = 100
+getgenv().spinSpeedss = 10
 
 t1:AddSlider({
   Name = "Spin Speed",
@@ -1097,16 +944,29 @@ t1:AddSlider({
 
 local spin = t1:AddToggle({
   Name = "Spin Starts",
-  Default = false
-})
-
-spin:Callback(function(spinning1)
-spam()
-while spinning1 and character and primaryPart do
-            primaryPart.CFrame = primaryPart.CFrame * CFrame.Angles(math.rad(spinSpeedss), math.rad(spinSpeedss), math.rad(spinSpeedss))
-            task.wait(0.1) -- Adjust this for spin speed
+  Default = false,
+  Callback = function(spinning1)
+    if spinning1 then
+      local spinSpeed = getgenv().spinSpeedss or 20
+      for i, v in pairs(getRoot(speaker.Character):GetChildren()) do
+        if v.Name == "Spinning" then
+          v:Destroy()
         end
-end)
+      end
+      local Spin = Instance.new("BodyAngularVelocity")
+      Spin.Name = "Spinning"
+      Spin.Parent = getRoot(speaker.Character)
+      Spin.MaxTorque = Vector3.new(0, math.huge, 0)
+      Spin.AngularVelocity = Vector3.new(0, spinSpeed, 0)
+    else
+      for i, v in pairs(getRoot(speaker.Character):GetChildren()) do
+        if v.Name == "Spinning" then
+          v:Destroy()
+        end
+      end
+    end
+  end
+})
 
 t2:AddSlider({
   Name = "Hitbox Size",
@@ -1239,17 +1099,12 @@ local myzaza = true
 
 -- Assuming t3 is already defined and adds the toggle
 local spam8 = t3:AddToggle({
-    Name = "Kill Block",   -- Name of the toggle button
-    Default = false        -- Default state of the toggle button (false = off)
+    Name = "Kill Block",   
+    Default = false        
 })
 
--- Callback function for toggle
 spam8:Callback(function(state)
-if state == true then
-    myzaza = false 
-else 
-myzaza = true 
-end
+myzaza = not state
 end)
 
 
@@ -1655,10 +1510,6 @@ t3:AddButton({"etheral.private", function()
   run("https://raw.githubusercontent.com/STEEZY02/etheral.private/refs/heads/main/etheral.private")
 end})
 
-t3:AddButton({"Keyboard", function()
-  run("https://gist.githubusercontent.com/RedZenXYZ/4d80bfd70ee27000660e4bfa7509c667/raw/da903c570249ab3c0c1a74f3467260972c3d87e6/KeyBoard%2520From%2520Ohio%2520Fr%2520Fr")
-end})
-
 t3:AddButton({"Teleport Gui", function()
   run("https://raw.githubusercontent.com/Infinity2346/Tect-Menu/main/Teleport%20Gui.lua")
 end})
@@ -1714,6 +1565,10 @@ end})
 
 t3:AddButton({"VR", function()
   run("https://raw.githubusercontent.com/0Ben1/fe/main/Vr%20arms")
+end})
+
+t3:AddButton({"Keyboard", function()
+  run("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/VirtualKeyboard.lua.txt")
 end})
 
 t3:AddButton({"Click TP [TOOLS]", function()
@@ -3075,6 +2930,8 @@ end})
 getgenv().NotiPJoim = true
 getgenv().NotiLevae = true
 
+gotopartDelay = 0.1
+
 function getPartByName(name)
     for _, part in pairs(workspace:GetDescendants()) do
         if part.Name == name and part:IsA("BasePart") then
@@ -3086,6 +2943,42 @@ end
 
 local title = t11:AddSection({"Part For Game [Data]"})
 
+local espTransparency = 0.3  
+local espColor = "Black"  -- ពណ៌ដើម
+local speaker = game.Players.LocalPlayer
+local espParts = {}
+
+getgenv().TeleportLoop = false
+getgenv().BringLoop = false
+
+-- Function សម្រាប់រកតម្លៃក្នុង Table
+function FindInTable(tbl, val)
+    for _, v in pairs(tbl) do
+        if v == val then
+            return true
+        end
+    end
+    return false
+end
+
+-- Function បង្កើត ESP
+function AddESP(part)
+    if part:IsA("BasePart") and part.Name:lower() == getgenv().PartName:lower() then  
+        if not part:FindFirstChild(getgenv().PartName.."_PESP") then
+            local a = Instance.new("BoxHandleAdornment")  
+            a.Name = getgenv().PartName.."_PESP"  
+            a.Parent = part  
+            a.Adornee = part  
+            a.AlwaysOnTop = true  
+            a.ZIndex = 0  
+            a.Size = part.Size  
+            a.Transparency = espTransparency  
+            a.Color = BrickColor.new(espColor)  -- ✅ ប្រើពណ៌ដែលបានជ្រើស  
+        end
+    end
+end
+
+-- បន្ថែម TextBox ដើម្បីបញ្ចូលឈ្មោះផ្នែក
 t11:AddTextBox({
   Name = "Enter Part Name",
   Description = "Enter Part",
@@ -3095,129 +2988,135 @@ t11:AddTextBox({
   end
 })
 
-t11:AddButton({"Teleport", function()
-spam()
-  local partName = PartName
-    local part = getPartByName(partName)
-    if part then
-        game.Players.LocalPlayer.Character:MoveTo(part.Position)
-        print("Teleported to:", partName)
-    else
-        print("Part not found:", partName)
-    end
-end})
-
-local loopgoto = t11:AddToggle({
-  Name = "Loop Teleport",
-  Default = false
+-- **📌 Dropdown សម្រាប់ជ្រើសរើសពណ៌ ESP**
+local Dropdown = t11:AddDropdown({
+  Name = "ESP COLOR",
+  Description = "Select the <font color='rgb(88, 101, 242)'>COLOR FOR ESP</font>",
+  Options = {"Black", "White"},
+  Default = "Black",
+  Callback = function(Value)
+    espColor = Value  -- ✅ កែប្រែពណ៌ ESP  
+  end
 })
 
-loopgoto:Callback(function(s)
-spam()
-  getgenv().np1 = s
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if np1 == true then
-            pcall(function()
-                local partName = PartName
-    local part = getPartByName(partName)
-    if part then
-        game.Players.LocalPlayer.Character:MoveTo(part.Position)
-        print("Teleported to:", partName)
-    else
-        print("Part not found:", partName)
-    end
-            end)
+-- ប៊ូតុង Part ESP
+t11:AddButton({"Part ESP", function()  
+	if getgenv().PartName and not FindInTable(espParts, getgenv().PartName) then  
+		table.insert(espParts, getgenv().PartName)  
+		for _, v in pairs(workspace:GetDescendants()) do  
+			AddESP(v)
+		end  
+	end  
+end})
+
+-- ប៊ូតុង UN ESP
+t11:AddButton({"UN ESP", function()  
+	espParts = {}  
+	for _, part in pairs(workspace:GetDescendants()) do  
+		if part:IsA("BasePart") then  
+			local adornment = part:FindFirstChild(getgenv().PartName.."_PESP")  
+			if adornment then  
+				adornment:Destroy()  
+			end  
+		end  
+	end  
+end})
+
+-- **📌 បង្កើត Event ដើម្បីចាប់ផ្តើម ESP ពេល Object បង្ហាញឡើងវិញ**
+workspace.DescendantAdded:Connect(function(part)
+    -- ពិនិត្យមើល PartName តើមានឬអត់ និងធ្វើការបន្ថែម ESP
+    if getgenv().PartName and part:IsA("BasePart") then
+        AddESP(part)
+        
+        -- ប្រសិនបើ TeleportLoop ត្រូវបានដំណើរការ
+        if getgenv().TeleportLoop == true then
+            -- ចាប់ត្រួតពិនិត្យផ្នែក និងផ្លាស់ទី Player ទៅផ្នែក
+            for i, v in pairs(workspace:GetDescendants()) do
+                if v.Name:lower() == getgenv().PartName:lower() and v:IsA("BasePart") then
+                    -- បញ្ចប់ការចូលក្នុងកៅអី (ប្រសិនបើមាន)
+                    local humanoid = speaker.Character:FindFirstChildOfClass('Humanoid')
+                    if humanoid and humanoid.SeatPart then
+                        humanoid.Sit = false
+                        wait(0.1)  -- រងចាំខ្លីមុននឹងបន្ត
+                    end
+                    -- រង់ចាំការព្យាយាមទៅកាន់ផ្នែក
+                    wait(gotopartDelay)
+                    -- កំណត់ CFrame របស់ RootPart ទៅ CFrame របស់ផ្នែកដែលជ្រើសរើស
+                    getRoot(speaker.Character).CFrame = v.CFrame
+                end
+            end
         end
-    end)
+        
+        -- ប្រសិនបើ BringLoop ត្រូវបានដំណើរការ
+        if getgenv().BringLoop == true then
+            -- ពិនិត្យនិងផ្លាស់ទី Part ទៅកាន់ Player
+            for i, v in pairs(workspace:GetDescendants()) do
+                if v.Name:lower() == getgenv().PartName:lower() and v:IsA("BasePart") then
+                    -- ផ្លាស់ប្ដូរទៅកាន់ CFrame របស់ speaker.Character
+                    v.CFrame = getRoot(speaker.Character).CFrame
+                end
+            end
+        end
+    end
 end)
+
+
+t11:AddButton({"Teleport", function()
+    for i, v in pairs(workspace:GetDescendants()) do
+      if v.Name:lower() == PartName:lower() and v:IsA("BasePart") then
+        -- បញ្ចប់ការចូលក្នុងកៅអី (ប្រសិនបើមាន)
+        local humanoid = speaker.Character:FindFirstChildOfClass('Humanoid')
+        if humanoid and humanoid.SeatPart then
+          humanoid.Sit = false
+          wait(0.1)  -- រង់ចាំខ្លីមុននឹងបន្ត
+        end
+        -- រង់ចាំការព្យាយាមទៅកាន់ផ្នែក
+        wait(gotopartDelay)
+        -- កំណត់ CFrame របស់ root part ទៅ CFrame របស់ផ្នែកដែលជ្រើសរើស
+        getRoot(speaker.Character).CFrame =  v.CFrame
+      end
+    end
+  end
+})
+
+t11:AddToggle({
+    Name = "Loop Teleport",
+    Default = false,
+    Callback = function(v)
+     getgenv().TeleportLoop = v
+    end
+})
 
 t11:AddButton({"Bring", function()
-spam()
-  local partName = PartName
-    local part = getPartByName(partName)
-    if part then
-        part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 5, 0)
-        print("Brought part:", partName)
-    else
-        print("Part not found:", partName)
-    end
-end})
+    -- ប្រសិនបើ spam() ត្រូវបានប្រើប្រាស់នៅទីនេះ
+    spam()
 
-local bring = t11:AddToggle({
-  Name = "Loop bring",
-  Default = false
+    -- កំណត់ speaker ឲ្យជាអ្នកលេងបច្ចុប្បន្ន
+    
+
+    -- ពិនិត្យផ្នែកនានា
+    for i, v in pairs(workspace:GetDescendants()) do
+      -- ប្រៀបធៀបឈ្មោះផ្នែក និង getstring(1)
+      if v.Name:lower() == PartName:lower() and v:IsA("BasePart") then
+        -- ផ្លាស់ប្ដូរទៅកាន់ CFrame របស់ speaker.Character
+        v.CFrame = getRoot(speaker.Character).CFrame
+      end
+    end
+  end
 })
 
-bring:Callback(function(s)
-spam()
-  getgenv().np2 = s
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if np2 == true then
-            pcall(function()
-                local partName = PartName
-    local part = getPartByName(partName)
-    if part then
-        part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 5, 0)
-        print("Brought part:", partName)
-    else
-        print("Part not found:", partName)
+t11:AddToggle({
+    Name = "Loop Bring",
+    Default = false,
+    Callback = function(v)
+     getgenv().BringLoop = v
     end
-            end)
-        end
-    end)
-end)
-
-t11:AddButton({"Click", function()
-spam()
-  local partName = PartName
-    local part = getPartByName(partName)
-    if part then
-        -- ពិនិត្យមើលថា part មាន ClickDetector រឺអត់
-        local clickDetector = part:FindFirstChildOfClass("ClickDetector")
-        if clickDetector then
-            -- បញ្ជាក់ MouseClick នៅលើ ClickDetector
-            clickDetector:MouseClick(game.Players.LocalPlayer.Character.HumanoidRootPart)
-            print("Clicked part:", partName)
-        else
-            print("ClickDetector មិនត្រូវបានរកឃើញនៅលើ part:", partName)
-        end
-    else
-        print("Part មិនត្រូវបានរកឃើញ:", partName)
-    end
-end})
-
-local loopclick = t11:AddToggle({
-  Name = "Loop Click",
-  Default = false
 })
-
-loopclick:Callback(function(s)
-spam()
-  getgenv().np3 = s
-    game:GetService("RunService").Heartbeat:Connect(function()
-        if np3 == true then
-            pcall(function()
-                local partName = PartName
-    local part = getPartByName(partName)
-    if part then
-        -- ពិនិត្យមើលថា part មាន ClickDetector រឺអត់
-        local clickDetector = part:FindFirstChildOfClass("ClickDetector")
-        if clickDetector then
-            -- បញ្ជាក់ MouseClick នៅលើ ClickDetector
-            clickDetector:MouseClick(game.Players.LocalPlayer.Character.HumanoidRootPart)
-            print("Clicked part:", partName)
-        else
-            print("ClickDetector មិនត្រូវបានរកឃើញនៅលើ part:", partName)
-        end
-    else
-        print("Part មិនត្រូវបានរកឃើញ:", partName)
-    end
-            end)
-        end
-    end)
-end)
 
 local title = t11:AddSection({"System Notification"})
+
+getgenv().NotiLevae = true
+getgenv().NotiPJoim = true
 
 local sp1 = t11:AddToggle({
   Name = "Notification Player Join",
@@ -3225,18 +3124,34 @@ local sp1 = t11:AddToggle({
 })
 
 sp1:Callback(function(s)
-spam()
+  -- កំណត់អថេរ global សម្រាប់ការប្រើប្រាស់ notification ពេលអ្នកលេងចូល
   getgenv().NotiPJoim = s
 end)
 
 local sp2 = t11:AddToggle({
-  Name = "Notification Player Levae",
+  Name = "Notification Player Leave",
   Default = true
 })
 
 sp2:Callback(function(s)
-spam()
+  -- កំណត់អថេរ global សម្រាប់ការប្រើប្រាស់ notification ពេលអ្នកលេងចាកចេញ
   getgenv().NotiLevae = s
+end)
+
+local Players = game:GetService("Players")
+
+Players.PlayerAdded:Connect(function(player)
+  -- បញ្ជាក់ថាអ្នកលេងត្រូវបានដាក់ជា join notification ត្រឹមត្រូវ
+  if getgenv().NotiPJoim == true then
+    
+  end
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+  -- បញ្ជាក់ថាអ្នកលេងត្រូវបានដាក់ជា leave notification ត្រឹមត្រូវ
+  if getgenv().NotiLevae == true then
+    
+  end
 end)
 
 local devi = ""
@@ -3261,15 +3176,10 @@ local t00 = t0:AddSection({"Game Data"})
 local t00 = t0:AddSection({"Game Clock : "..game:GetService("Lighting").ClockTime})
 
 local cs2 = t0:AddSection({"Health : "..game.Players.LocalPlayer.Character.Humanoid.Health})
-
 local t00 = t0:AddSection({"You Profile"})
-
 local t01 = t0:AddSection({"You Age [ "..game.Players.LocalPlayer.AccountAge.." ]"})
-
 local t08 = t0:AddSection({"You Name [ "..game.Players.LocalPlayer.Name.." ]"})
-
 local youID = game.Players.LocalPlayer.UserId
-
 local t03 = t0:AddSection({"Game ID [ "..game.PlaceId.." ]"})
 
 t0:AddButton({"COPY", function()
@@ -3297,7 +3207,6 @@ local TimeSpam1 = 0  -- នាទី
 local TimeSpam2 = 0 -- វិនាទី
 local TimeSpam3 = 0 -- ម៉ោង
 
-showNotification("Script All Load Work", 2)
 
 while true do
     TimeSpam2 = TimeSpam2 + 1
@@ -3313,26 +3222,9 @@ while true do
     wait(1)
 end
 
+
+
 end
 
- 
 
-wait(0.1)
-
-
-MAIN1()
-
-local StarterGui = game:GetService("StarterGui")
-local Players = game:GetService("Players")
-
-local function notifyAdmin(player)
-		noti2(player.Name.." has joined the game!", "Age : ", player)
-end
-
-Players.PlayerAdded:Connect(notifyAdmin)
-
-local Players = game:GetService("Players")
-
-Players.PlayerRemoving:Connect(function(player)
-		noti2(player.Name .. " has levae the game!", "Age : ", player)
-end)
+Datameun()
