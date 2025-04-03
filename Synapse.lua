@@ -1,4 +1,3 @@
-local function Datameun()
 function noti2(title,title2,player)
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = title, 
@@ -7,11 +6,20 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 })
 end
 
+local function sendNotification(title, text, duration) game:GetService("StarterGui"):SetCore("SendNotification", { Title = title, Text = text, Duration = duration, }) end
+
+local function safeCall(func, name) local success, err = pcall(func) if not success then sendNotification("Error", "Error in " .. name .. ": " .. err, 5) end end
+
 local function isNumber(str)
   if tonumber(str) ~= nil or str == 'inf' then
     return true
   end
 end
+
+-- មុខងារដើម្បីបញ្ជូនការជូនដំណឹ
+
+-- ហៅមុខងារ
+sendNotification("Model Loadd", "Game Loadddd Wait", 5)  -- បង្ហាញការជូនដំណឹងពួកវា 5 វិនាទី
 
 local Players = game:GetService("Players")
 
@@ -22,7 +30,7 @@ local function getPlayer(input, speaker)
         if player.Name:lower():sub(1, #input) == input:lower() then
             table.insert(foundPlayers, player)
         end
-    end
+    end 
     return foundPlayers
 end
 
@@ -551,7 +559,7 @@ end
 joingame = false
 
 local Window = redzlib:MakeWindow({
-  Title = "SynapseX | Universal V"..UserVersion,
+  Title = "SynapseX | Universal V1",
   SubTitle = "by bysuskhmer",
   SaveFolder = "Synapse | Data.lua"
 })
@@ -642,10 +650,10 @@ local function StopAnim()
     end
 end
 
+
 local function SendNotify(title, message, duration)
 	game:GetService("StarterGui"):SetCore("SendNotification", {Title = title,Text = message,Duration = duration;})
 end
-
 local t0 = Window:MakeTab({"Main", ""})
 local t1 = Window:MakeTab({"Player", ""})
 local t2 = Window:MakeTab({"Hitbox", ""})
@@ -660,6 +668,8 @@ local t10 = Window:MakeTab({"Premium", ""})
 local t11 = Window:MakeTab({"Other", ""})
 
 Window:SelectTab(t1)
+
+-- Define each data variable
 
 t1:AddTextBox({
   Name = "Local Speed",
@@ -1104,7 +1114,11 @@ local spam8 = t3:AddToggle({
 })
 
 spam8:Callback(function(state)
-myzaza = not state
+ if state == true then
+    myzaza = false
+ else 
+    myzaza = true 
+ end
 end)
 
 
@@ -1462,13 +1476,29 @@ t3:AddButton({"Noclip Camera", function()
   run("https://pastebin.com/raw/y8DAEgGy")
 end})
 
-t3:AddButton({"destroy Delay", function()
-spam()
-  while true do
-wait(0,3)
-for i,v in ipairs(game:GetService("Workspace"):GetDescendants()) do if v.ClassName == "ProximityPrompt" then v.HoldDuration = 0 end end
-end
+t3:AddButton({"Keyboard", function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/VirtualKeyboard.lua.txt"))()
 end})
+
+t3:AddButton({
+        "destroy Delay", 
+        function()
+            while task.wait(0.3) do
+                local hasChanged = false
+                
+                for _, v in ipairs(workspace:GetDescendants()) do
+                    if v:IsA("ProximityPrompt") and v.HoldDuration ~= 0 then
+                        v.HoldDuration = 0
+                        hasChanged = true
+                    end
+                end
+                
+                if not hasChanged then
+                    task.wait(1)
+                end
+            end
+        end
+    })
 
 t3:AddButton({"Shif Lock!", function()
   run("https://raw.githubusercontent.com/Unknownproootest/Permanent-Shift-Lock-Beta/alt/PermShiftlockLeft")
@@ -1543,10 +1573,6 @@ end
 end
 end})
 
-t3:AddButton({"Bring Player", function()
-  run("https://pastebin.com/raw/iThJgCAS")
-end})
-
 t3:AddButton({"FE Lag Switch", function()
   run("https://raw.githubusercontent.com/0Ben1/fe/main/Protected%20-%202023-05-28T225112.055.lua.txt")
 end})
@@ -1559,16 +1585,8 @@ t3:AddButton({"Chat Art", function()
   run("https://raw.githubusercontent.com/balditeacher/obfuscated-mobile-supportloadstring/main/obfuscated")
 end})
 
-t3:AddButton({"Car Fly", function()
-  run("https://pastebin.com/raw/MHE1cbWF")
-end})
-
 t3:AddButton({"VR", function()
   run("https://raw.githubusercontent.com/0Ben1/fe/main/Vr%20arms")
-end})
-
-t3:AddButton({"Keyboard", function()
-  run("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/VirtualKeyboard.lua.txt")
 end})
 
 t3:AddButton({"Click TP [TOOLS]", function()
@@ -1587,13 +1605,6 @@ end})
 
 t3:AddButton({"Telekinesis [TOOLS]", function()
   run("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/qwerty11.lua.txt")
-end})
-
-t3:AddButton({"Boombox [TOOLS]", function()
- _G.boomboxb = game:GetObjects('rbxassetid://2235994611')[1]
-_G.boomboxb.Parent = game:GetService'Players'.LocalPlayer.Backpack
-loadstring(_G.boomboxb.Client.Source)() 
-loadstring(_G.boomboxb.Server.Source)()
 end})
 
 t3:AddButton({"Invisible [TOOLS]", function()
@@ -1655,10 +1666,6 @@ t3:AddButton({"Ghost Hub ", function()
   run("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub")
 end})
 
-t3:AddButton({"X Mobile Old", function()
-  run("https://rawscripts.net/raw/Universal-Script-New-Bysuskhmer-14550")
-end})
-
 t3:AddButton({"SystemBroken", function()
   run("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script")
 end})
@@ -1714,6 +1721,12 @@ t4:AddButton({"SCP -096", function()
   loadstring(game:HttpGet("https://pastefy.app/YsJgITXR/raw"))()
 end})
 
+local pg1 = t5:AddSection({"Murder Vs Sheriff 2"})
+
+t5:AddButton({"Murder Vs Sheriff 2(hakariqScripts)", function()
+  run("https://raw.githubusercontent.com/hakariqScripts/aimbot-script/refs/heads/main/aimbot%20script")
+end})
+
 local pg1 = t5:AddSection({"Create a Cart Ride"})
 
 t5:AddButton({"Create a Cart Ride(HydraX)", function()
@@ -1735,7 +1748,7 @@ end})
 local pg1 = t5:AddSection({"Build a boat"})
 
 t5:AddButton({"Build a boat(Prosexy)", function()
-  run("https://raw.githubusercontent.com/Prosexy/Demonic-HUB-V2/main/DemonicHub_V2.lua")
+  loadstring(game:HttpGet("https://rawscripts.net/raw/Build-A-Boat-For-Treasure-therHub-18014"))()
 end})
 
 local pg1 = t5:AddSection({"Car Dealership Tycoon"})
@@ -1849,6 +1862,156 @@ end})
 
 t5:AddButton({"Build a battle (Bysuskhmerops62)", function()
   run("https://raw.githubusercontent.com/Bysuskhmerops62/game/refs/heads/main/JAY_NOT%20ZIAD.txt")
+  
+  local Player = game.Players.LocalPlayer
+local GUI = Instance.new("ScreenGui")
+GUI.Name = "AdminPanel"
+GUI.Parent = Player.PlayerGui
+GUI.ResetOnSpawn = false -- កុំអោយ GUI បាត់ពេល Respawn
+
+-- Main Frame
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = GUI
+MainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.5, -150, 0.5, -200)
+MainFrame.Size = UDim2.new(0, 300, 0, 400)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+-- Title
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Title.BorderSizePixel = 0
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Font = Enum.Font.SourceSansBold
+Title.Text = "ADMIN PANEL"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 20
+
+-- Close Button (លាក់ GUI ជំនួសអោយលុប)
+local CloseButton = Instance.new("TextButton")
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = MainFrame
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+CloseButton.Position = UDim2.new(1, -30, 0, 5)
+CloseButton.Size = UDim2.new(0, 25, 0, 25)
+CloseButton.Font = Enum.Font.SourceSans
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextSize = 16
+CloseButton.MouseButton1Click:Connect(function()
+    GUI.Enabled = false -- លាក់ GUI ជំនួសអោយ :Destroy()
+end)
+
+-- ប៊ូតុងដើម្បីបើក GUI ឡើងវិញ (ដាក់នៅកន្លែងងាយឃើញ)
+local OpenButton = Instance.new("TextButton")
+OpenButton.Name = "OpenButton"
+OpenButton.Parent = Player.PlayerGui
+OpenButton.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
+OpenButton.Position = UDim2.new(0, 10, 0.5, -15)
+OpenButton.Size = UDim2.new(0, 30, 0, 30)
+OpenButton.Font = Enum.Font.SourceSansBold
+OpenButton.Text = ">"
+OpenButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OpenButton.TextSize = 18
+OpenButton.Visible = false -- លាក់ដំបូង
+
+-- ពេលចុចលាក់ GUI បើកប៊ូតុង OpenButton
+local TweenService = game:GetService("TweenService")
+
+-- ពេលលាក់ GUI
+CloseButton.MouseButton1Click:Connect(function()
+    local tween = TweenService:Create(MainFrame, TweenInfo.new(0.3), {Position = UDim2.new(0.5, -150, -1, -200)})
+    tween:Play()
+    tween.Completed:Wait()
+    GUI.Enabled = false
+    OpenButton.Visible = true
+end)
+
+-- ពេលបើក GUI
+OpenButton.MouseButton1Click:Connect(function()
+    GUI.Enabled = true
+    local tween = TweenService:Create(MainFrame, TweenInfo.new(0.3), {Position = UDim2.new(0.5, -150, 0.5, -200)})
+    tween:Play()
+    OpenButton.Visible = false
+end)
+
+-- កូដផ្សេងៗ (Commands List) ដដែល...
+-- Scroll Frame for Commands
+local ScrollFrame = Instance.new("ScrollingFrame")
+ScrollFrame.Name = "ScrollFrame"
+ScrollFrame.Parent = MainFrame
+ScrollFrame.BackgroundTransparency = 1
+ScrollFrame.Position = UDim2.new(0, 0, 0, 45)
+ScrollFrame.Size = UDim2.new(1, 0, 1, -45)
+ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 600) -- Adjust based on content
+ScrollFrame.ScrollBarThickness = 5
+
+-- Admin Comment (Top Text)
+local AdminComment = Instance.new("TextLabel")
+AdminComment.Name = "AdminComment"
+AdminComment.Parent = ScrollFrame
+AdminComment.BackgroundTransparency = 1
+AdminComment.Size = UDim2.new(1, -10, 0, 30)
+AdminComment.Position = UDim2.new(0, 5, 0, 10)
+AdminComment.Font = Enum.Font.SourceSansBold
+AdminComment.Text = "ADMIN COMMANDS:"
+AdminComment.TextColor3 = Color3.fromRGB(255, 255, 255)
+AdminComment.TextSize = 18
+AdminComment.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Command List (Middle Text)
+local CommandList = {
+    ":bring playername",
+    ":loopfreeze playername",
+    ":permfreeze playername",
+    ":loopkill playername",
+    ":admin playername",
+    ":aura",
+    ":unaura",
+    ":kill all",
+    ":kill playername",
+    ":freeze all",
+    ":freeze playername",
+    ":tornado",
+    ":bringtornado",
+    ":untornado",
+    ":classicblackhole or :classicbh",
+    ":heal"
+}
+
+local YPosition = 50 -- Start below AdminComment
+for _, cmd in pairs(CommandList) do
+    local CmdText = Instance.new("TextLabel")
+    CmdText.Name = "Cmd_" .. cmd
+    CmdText.Parent = ScrollFrame
+    CmdText.BackgroundTransparency = 1
+    CmdText.Size = UDim2.new(1, -10, 0, 20)
+    CmdText.Position = UDim2.new(0, 5, 0, YPosition)
+    CmdText.Font = Enum.Font.SourceSans
+    CmdText.Text = cmd
+    CmdText.TextColor3 = Color3.fromRGB(255, 255, 255)
+    CmdText.TextSize = 16
+    CmdText.TextXAlignment = Enum.TextXAlignment.Left
+    YPosition = YPosition + 25
+end
+
+-- Footer Text (Bottom Text)
+local Footer = Instance.new("TextLabel")
+Footer.Name = "Footer"
+Footer.Parent = ScrollFrame
+Footer.BackgroundTransparency = 1
+Footer.Size = UDim2.new(1, -10, 0, 30)
+Footer.Position = UDim2.new(0, 5, 0, YPosition + 10)
+Footer.Font = Enum.Font.SourceSansItalic
+Footer.Text = "Type in chat to use commands"
+Footer.TextColor3 = Color3.fromRGB(200, 200, 200)
+Footer.TextSize = 14
+Footer.TextXAlignment = Enum.TextXAlignme
 end})
 
 local pg1 = t5:AddSection({"Brookhaven"})
@@ -2347,10 +2510,43 @@ t8:AddTextBox({
   Description = "Enter Name",
   Default = "",
   Callback = function(Value)
-    Username = Value
-    Target = Value
+    local Players = game:GetService("Players")
+
+    -- Function to check player name and return UserId
+    local function GetPlayerInfo(partialName)
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player.Name:lower():match("^" .. partialName:lower()) then
+                return player.Name, player.UserId  -- Return the full player name and UserId
+            end
+        end
+        return nil, nil  -- Return nil if no match found
+    end
+
+    -- Example usage
+    local partialName = Value  -- The value entered in the textbox
+    local fullPlayerName, userId = GetPlayerInfo(partialName)
+
+    if fullPlayerName then
+        print("Found player: " .. fullPlayerName .. " | ID: " .. userId)
+        
+        -- Assigning values
+        Username = fullPlayerName
+        
+        -- Sending notification with user avatar
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "PLAYER INFO", 
+            Text = "Name: " .. fullPlayerName .. "\nID: " .. userId, 
+            Icon = "https://www.roblox.com/headshot-thumbnail/image?userId="..userId.."&width=420&height=420&format=png",
+            Duration = 5,
+        })
+    else
+        print("No player found with the name matching '" .. partialName .. "'")
+        sendNotification("ERROR", "No player found!", 5)
+    end
   end
 })
+
+-- ប្រើកម្រងនៃ Player និង Humanoid ដើម្បីពិនិត្យមើលថាអ្នកលេងស្លាប់
 
 local wi = t8:AddSection({"Please fill in your full name correctly."})
 
@@ -2396,7 +2592,7 @@ spam()
         
         -- បង្ហាញជាមួយ TextBox ឬ Notification
         local ageMessage = "Player " .. player.Name .. " has been on Roblox for " .. age .. " days."
-        noti("Player For : Roblox", ageMessage)
+        sendNotification("The Player", ageMessage, 5)
     else
         print("Player not found!")
     end
@@ -2404,7 +2600,7 @@ end})
 
 t8:AddButton({"Fling", function()
 spam()
-	local Targets = Username
+local Targets = {"others", "Target Name", Username}
 
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
@@ -2627,38 +2823,6 @@ for _,x in next, Targets do
         Message("Error Occurred", "Username Invalid", 5)
     end
 end
-end})
-
-
-t8:AddButton({"Fling", function()
-spam()
-
-game.Players.LocalPlayer.Character.Humanoid.Name = 1
-local l = game.Players.LocalPlayer.Character["1"]:Clone()
-l.Parent = game.Players.LocalPlayer.Character
-l.Name = "Humanoid"
-wait()
-game.Players.LocalPlayer.Character["1"]:Destroy()
-game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
-game.Players.LocalPlayer.Character.Animate.Disabled = true
-wait()
-game.Players.LocalPlayer.Character.Animate.Disabled = false
-game.Players.LocalPlayer.Character.Humanoid.DisplayDistanceType = "None"
-for i,v in pairs(game:GetService'Players'.LocalPlayer.Backpack:GetChildren())do
-game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
-end
-wait()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Target].Character.HumanoidRootPart.CFrame
-wait()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Target].Character.HumanoidRootPart.CFrame
-wait()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(-100000,1000000000000000000000,-100000))
-wait()
-local prt=Instance.new("Model", workspace);
-Instance.new("Part", prt).Name="Torso";
-Instance.new("Part", prt).Name="Head";
-Instance.new("Humanoid", prt).Name="Humanoid";
-game.Players.LocalPlayer.Character=prt
 end})
 
 t8:AddButton({"Fling All", function()
@@ -2899,7 +3063,7 @@ end})
 
 t9:AddButton({"position finder gui", function()
   run("https://pastebin.com/raw/BjViRedU")
-end})
+end}) 
 
 t9:AddButton({"turtle spy", function()
   run("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/Turtle%20Spy.txt")
@@ -2920,12 +3084,9 @@ spam()
   run2("20")
 end})
 
-run("https://raw.githubusercontent.com/Bysuskhmerops62/script-/refs/heads/main/raw.txt")
-
-t10:AddButton({"Buy Premium 80 Robux = 1.15$", function()
-spam()
-  copy("https://www.roblox.com/game-pass/928623162/Blue-Mod-Premium")
-end})
+t10:AddButton({"Buy Premium 1$", function()
+     
+ end})
 
 getgenv().NotiPJoim = true
 getgenv().NotiLevae = true
@@ -2964,16 +3125,40 @@ end
 -- Function បង្កើត ESP
 function AddESP(part)
     if part:IsA("BasePart") and part.Name:lower() == getgenv().PartName:lower() then  
-        if not part:FindFirstChild(getgenv().PartName.."_PESP") then
-            local a = Instance.new("BoxHandleAdornment")  
-            a.Name = getgenv().PartName.."_PESP"  
-            a.Parent = part  
-            a.Adornee = part  
-            a.AlwaysOnTop = true  
-            a.ZIndex = 0  
-            a.Size = part.Size  
-            a.Transparency = espTransparency  
-            a.Color = BrickColor.new(espColor)  -- ✅ ប្រើពណ៌ដែលបានជ្រើស  
+        if not part:FindFirstChild(getgenv().PartName.."_TextESP") then
+            -- បង្កើត BillboardGui
+            local billboard = Instance.new("BillboardGui")
+            billboard.Name = getgenv().PartName.."_TextESP"
+            billboard.Parent = part
+            billboard.Adornee = part
+            billboard.Size = UDim2.new(0, 200, 0, 50)  -- ✅ ទំហំក្រឡា
+            billboard.StudsOffset = Vector3.new(0, 3, 0)  -- ✅ ចំណុះខ្ពស់ពី Part
+            billboard.AlwaysOnTop = true  -- ✅ ឲ្យអត្ថបទនៅលើគ្រប់ទីកន្លែង
+
+            -- បង្កើត TextLabel
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Parent = billboard
+            textLabel.Size = UDim2.new(1, 0, 1, 0)
+            textLabel.BackgroundTransparency = 1
+            textLabel.Text = part.Name  -- ✅ បង្ហាញឈ្មោះ Part
+            textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)  -- ✅ ពណ៌ក្រហម (អាចផ្លាស់ប្ដូរ)
+            textLabel.TextStrokeTransparency = 0  -- ✅ ពណ៌បន្ទាត់ខាងក្រៅ
+            textLabel.TextSize = 20  -- ✅ ទំហំអក្សរ
+            textLabel.Font = Enum.Font.SourceSansBold  -- ✅ រចនាប័ទ្មអក្សរ
+        end
+    end
+end
+
+function AddESPModel(model)
+    if model:IsA("Model") and model.Name:lower() == getgenv().PartName:lower() then  
+        if not model:FindFirstChild(getgenv().PartName.."_PESP") then
+            local esp = Instance.new("Highlight")  
+            esp.Name = getgenv().PartName.."_PESP"  
+            esp.Parent = model  
+            esp.FillColor = Color3.fromRGB(255, 0, 0)  -- ✅ ពណ៌ក្រហម (អាចផ្លាស់ប្ដូរ)  
+            esp.OutlineColor = Color3.fromRGB(255, 255, 255)  -- ✅ បន្ទាត់ពណ៌ស  
+            esp.FillTransparency = 0.5  -- ✅ កម្រិតថ្លា  
+            esp.OutlineTransparency = 0  -- ✅ បង្ហាញបន្ទាត់ច្បាស់  
         end
     end
 end
@@ -2984,7 +3169,27 @@ t11:AddTextBox({
   Description = "Enter Part",
   Default = "",
   Callback = function(Value)
+    -- កំណត់ឈ្មោះផ្នែកដែលអ្នកចង់ពិនិត្យ
     getgenv().PartName = Value
+
+    -- ពិនិត្យថា Part មាននៅក្នុងហ្គេមឬអត់
+    local part = workspace:FindFirstChild(getgenv().PartName)
+    
+    if part and part:IsA("BasePart") then
+        StarterGui:SetCore("SendNotification", {
+                Title = "Part Successful ✅",
+                Text = "If have part: "..count,
+                Icon = "rbxassetid://106252463466449",
+                Duration = 5
+            })
+    else
+        StarterGui:SetCore("SendNotification", {
+                Title = "Part Error ❌",
+                Text = "Not Have Part: "..count,
+                Icon = "rbxassetid://106252463466449",
+                Duration = 5
+            })
+    end
   end
 })
 
@@ -3024,41 +3229,106 @@ end})
 
 -- **📌 បង្កើត Event ដើម្បីចាប់ផ្តើម ESP ពេល Object បង្ហាញឡើងវិញ**
 workspace.DescendantAdded:Connect(function(part)
-    -- ពិនិត្យមើល PartName តើមានឬអត់ និងធ្វើការបន្ថែម ESP
-    if getgenv().PartName and part:IsA("BasePart") then
+    -- ពិនិត្យមើលថា PartName មានតម្លៃ និង part ជា BasePart ឬអត់
+    if getgenv().PartName and part:IsA("BasePart") and part.Name:lower() == getgenv().PartName:lower() then
         AddESP(part)
-        
+
         -- ប្រសិនបើ TeleportLoop ត្រូវបានដំណើរការ
-        if getgenv().TeleportLoop == true then
-            -- ចាប់ត្រួតពិនិត្យផ្នែក និងផ្លាស់ទី Player ទៅផ្នែក
-            for i, v in pairs(workspace:GetDescendants()) do
-                if v.Name:lower() == getgenv().PartName:lower() and v:IsA("BasePart") then
-                    -- បញ្ចប់ការចូលក្នុងកៅអី (ប្រសិនបើមាន)
-                    local humanoid = speaker.Character:FindFirstChildOfClass('Humanoid')
-                    if humanoid and humanoid.SeatPart then
-                        humanoid.Sit = false
-                        wait(0.1)  -- រងចាំខ្លីមុននឹងបន្ត
-                    end
-                    -- រង់ចាំការព្យាយាមទៅកាន់ផ្នែក
-                    wait(gotopartDelay)
-                    -- កំណត់ CFrame របស់ RootPart ទៅ CFrame របស់ផ្នែកដែលជ្រើសរើស
-                    getRoot(speaker.Character).CFrame = v.CFrame
-                end
+        if getgenv().TeleportLoop then
+            local humanoid = speaker.Character and speaker.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid.SeatPart then
+                humanoid.Sit = false
+                task.wait(0.1) -- ចាំមួយរយៈ
+            end
+
+            task.wait(gotopartDelay)
+            local root = getRoot(speaker.Character)
+            if root then
+                root.CFrame = part.CFrame
             end
         end
-        
+
         -- ប្រសិនបើ BringLoop ត្រូវបានដំណើរការ
-        if getgenv().BringLoop == true then
-            -- ពិនិត្យនិងផ្លាស់ទី Part ទៅកាន់ Player
-            for i, v in pairs(workspace:GetDescendants()) do
-                if v.Name:lower() == getgenv().PartName:lower() and v:IsA("BasePart") then
-                    -- ផ្លាស់ប្ដូរទៅកាន់ CFrame របស់ speaker.Character
-                    v.CFrame = getRoot(speaker.Character).CFrame
-                end
+        if getgenv().BringLoop then
+            local root = getRoot(speaker.Character)
+            if root then
+                part.CFrame = root.CFrame
             end
         end
     end
 end)
+
+t11:AddButton({"Touched", function()  
+    -- ពិនិត្យថា PartName មានតម្លៃមុនពេលប្រើ
+    if not getgenv().PartName then
+        warn("PartName មិនបានកំណត់!")
+        return
+    end
+
+    -- យកផ្នែកដែលអ្នកចង់ពិនិត្យការប៉ះ
+    local part = workspace:FindFirstChild(getgenv().PartName)
+
+    -- ពិនិត្យថា part មានក្នុង workspace ឬអត់
+    if not part or not part:IsA("BasePart") then
+        warn("PartName មិនមានឬមិនត្រឹមត្រូវ!")
+        return
+    end
+
+    -- មុខងារដែលប្រើពេលផ្នែកត្រូវបានប៉ះ
+    local function onTouched(hit)
+        local character = hit.Parent
+        if character and character:FindFirstChild("Humanoid") then
+            print(character.Name .. " បានប៉ះផ្នែក " .. part.Name .. "!")
+            -- អ្នកអាចធ្វើសកម្មភាពផ្សេងៗនៅទីនេះ
+        end
+    end
+
+    -- ធ្វើការចុចព្រឹត្តិការណ៍ Touched
+    part.Touched:Connect(onTouched)
+
+    print("Script ដំណើរការរួចរាល់! កំពុងស្កេនការប៉ះ...")
+end})
+
+local TweenService = game:GetService("TweenService")
+local speaker = game.Players.LocalPlayer
+
+-- Function ឲ្យយក RootPart
+local function getRoot(char)
+    return char and char:FindFirstChild("HumanoidRootPart")
+end
+
+t11:AddButton({"tweengotopart", function()
+    if getgenv().PartName then
+        for _, v in pairs(workspace:GetDescendants()) do
+            if v:IsA("BasePart") and v.Name:lower() == getgenv().PartName:lower() then
+                local character = speaker.Character
+                local humanoid = character and character:FindFirstChildOfClass('Humanoid')
+                local rootPart = getRoot(character)
+
+                -- បញ្ចប់ការចូលក្នុងកៅអី
+                if humanoid and humanoid.SeatPart then
+                    humanoid.Sit = false
+                    wait(0.1)
+                end
+
+                -- រង់ចាំការព្យាយាមទៅកាន់ផ្នែក
+                wait(gotopartDelay or 0.5)
+
+                -- ពិនិត្យថា rootPart មានមែនឬអត់
+                if rootPart then
+                    local tweenInfo = TweenInfo.new(tweenSpeed or 1, Enum.EasingStyle.Linear)
+                    local goal = { CFrame = v.CFrame }
+                    local tween = TweenService:Create(rootPart, tweenInfo, goal)
+                    tween:Play()
+                else
+                    warn("Cannot find HumanoidRootPart!")
+                end
+            end
+        end
+    else
+        warn("PartName is not set!")
+    end
+end})
 
 
 t11:AddButton({"Teleport", function()
@@ -3113,6 +3383,38 @@ t11:AddToggle({
     end
 })
 
+t11:AddButton({"ESP MODEL", function()
+    AddESPModel(getgenv().PartName)
+  end
+})
+
+local title = t11:AddSection({"System Music"})
+
+t11:AddTextBox({
+  Name = "Enter ID MUSIC Name",
+  Description = "Enter ID",
+  Default = "",
+  Callback = function(Value)
+    getgenv().idmusic = Value
+  end
+})
+
+local song = Instance.new("Sound")
+
+t11:AddToggle({
+    Name = "STATE MUSIC",
+    Default = false,
+    Callback = function(v)
+    if v == true then
+	song.SoundId = "rbxassetid://"..getgenv().idmusic
+	song.Parent = game:GetService("SoundService")
+	song:Play()
+	else 
+	song:Stop()
+	end
+    end
+})
+
 local title = t11:AddSection({"System Notification"})
 
 getgenv().NotiLevae = true
@@ -3143,16 +3445,25 @@ local Players = game:GetService("Players")
 Players.PlayerAdded:Connect(function(player)
   -- បញ្ជាក់ថាអ្នកលេងត្រូវបានដាក់ជា join notification ត្រឹមត្រូវ
   if getgenv().NotiPJoim == true then
-    
+    StarterGui:SetCore("SendNotification", {
+            Title = "Has Player Joim.",
+            Text = "The Name"..player.Name,
+            Icon = "rbxassetid://106252463466449"
+        })
   end
 end)
 
 Players.PlayerRemoving:Connect(function(player)
   -- បញ្ជាក់ថាអ្នកលេងត្រូវបានដាក់ជា leave notification ត្រឹមត្រូវ
   if getgenv().NotiLevae == true then
-    
+    StarterGui:SetCore("SendNotification", {
+            Title = "Has Player Levea.",
+            Text = "The Name"..player.Name,
+            Icon = "rbxassetid://106252463466449"
+        })
   end
 end)
+
 
 local devi = ""
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
@@ -3163,6 +3474,115 @@ elseif not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled an
     devi = "PC"
 end
 
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local StarterGui = game:GetService("StarterGui")
+
+game:GetService("HttpService").HttpEnabled = true
+
+-- Firebase Configuration (***API Key Should Be Hidden***)
+local FIREBASE_API_KEY = "BFTWO30r_BCN60DeGQYZ2sipOA687_HrUoXtBbm0Y3GjhGcJYhoCmHngbYC_kPJ2Of_bc9mDoZKgeKzm0FltysY" -- Hide API Key
+local PROJECT_ID = "ta-bin-2-default-rtdb"
+local DATABASE_URL = "https://" .. PROJECT_ID .. ".firebaseio.com/players.json"
+
+-- Authenticate with Firebase (Anonymous Login)
+local function loginToFirebase()
+    local authUrl = "https://identitytoolkit.googleapis.com/v1/accounts:signInAnonymously?key=" .. FIREBASE_API_KEY
+    local success, response = pcall(function()
+        return HttpService:PostAsync(authUrl, HttpService:JSONEncode({ returnSecureToken = true }))
+    end)
+
+    if success then
+        return HttpService:JSONDecode(response)
+    else
+        StarterGui:SetCore("SendNotification", {
+            Title = "Firebase failed.",
+            Text = "",
+            Icon = "rbxassetid://106252463466449"
+        })
+        return nil
+    end
+end
+
+-- Save Player Data to Firebase
+local function savePlayerData(authData)
+    local player = Players.LocalPlayer
+    if not player then return end -- Prevent Error if LocalPlayer is nil
+
+    local playerData = {
+        username = player.Name,
+        userId = player.UserId,
+        joinTime = os.time()
+    }
+
+    local saveUrl = DATABASE_URL .. "?auth=" .. authData.idToken
+    local success, response = pcall(function()
+        return HttpService:PostAsync(saveUrl, HttpService:JSONEncode(playerData), Enum.HttpContentType.ApplicationJson)
+    end)
+
+    if success then
+        StarterGui:SetCore("SendNotification", {
+            Title = "Data saved successfully!",
+            Text = "",
+            Icon = "rbxassetid://106252463466449"
+        })
+    else
+        StarterGui:SetCore("SendNotification", {
+            Title = "Data saving failed",
+            Text = tostring(response),
+            Icon = "rbxassetid://106252463466449"
+        })
+    end
+end
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local StarterGui = game:GetService("StarterGui")
+
+local function showTotalPlayers()
+    local playerCounter = ReplicatedStorage:FindFirstChild("PlayerCounter")
+
+    if playerCounter then
+        local success, count = pcall(function()
+            return playerCounter:InvokeServer()
+        end)
+
+        if success then
+            StarterGui:SetCore("SendNotification", {
+                Title = "Total Players",
+                Text = "Total number of visitors: " .. count,
+                Icon = "rbxassetid://106252463466449",
+                Duration = 5
+            })
+        else
+            StarterGui:SetCore("SendNotification", {
+                Title = "Players",
+                Text = "Error fetching player count: " .. tostring(count),
+                Icon = "rbxassetid://106252463466449",
+                Duration = 5
+            })
+        end
+    else
+        StarterGui:SetCore("SendNotification", {
+            Title = "Players",
+            Text = "PlayerCounter not found in ReplicatedStorage",
+            Icon = "rbxassetid://106252463466449",
+            Duration = 5
+        })
+    end
+end
+
+-- Execute Login and Save Data
+local authData = loginToFirebase()
+if authData then
+    savePlayerData(authData)
+end
+
+-- Show Player Count
+showTotalPlayers()
+
+-- Fix t0:AddSection (Make sure `count` is properly defined)
+local t00 = t0:AddSection({ "Player Login: " .. (count or "Unknown") })
 local ex = t0:AddSection({"You Play : "})
 
 t0:AddDiscordInvite({
@@ -3221,10 +3641,4 @@ while true do
     ex:Set("You Play : " .. TimeSpam3 .. " h " .. TimeSpam1 .. " m " .. TimeSpam2 .. " s ")
     wait(1)
 end
-
-
-
-end
-
-
-Datameun()
+data12 = true
