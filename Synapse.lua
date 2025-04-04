@@ -1103,6 +1103,130 @@ if state then
 	end
 end)
 
+t3:AddButton({"SHOW HP PLAYER ALL", function()
+spam()
+  -- Script to show HP and WalkSpeed above all players' heads
+-- Version 1.2
+
+local Players = game:GetService("Players")
+
+-- Configuration
+local WALKSPEED_MAX = 16 -- Maximum possible walkspeed in your game
+local UPDATE_INTERVAL = 0.2 -- How often to update the display (seconds)
+
+-- Function to create HP and WalkSpeed display for a player
+function createPlayerDisplay(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    local head = character:WaitForChild("Head")
+
+    -- Create BillboardGui
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "PlayerStatsDisplay"
+    billboard.Adornee = head
+    billboard.Size = UDim2.new(0, 150, 0, 60)
+    billboard.StudsOffset = Vector3.new(0, 3, 0)
+    billboard.AlwaysOnTop = true
+    billboard.LightInfluence = 0
+    billboard.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+    -- Create HP text label
+    local hpText = Instance.new("TextLabel")
+    hpText.Name = "HPText"
+    hpText.Size = UDim2.new(1, 0, 0.5, 0)
+    hpText.Position = UDim2.new(0, 0, 0, 0)
+    hpText.BackgroundTransparency = 1
+    hpText.TextScaled = true
+    hpText.Font = Enum.Font.Arcade
+    hpText.TextColor3 = Color3.new(1, 1, 1)
+    hpText.TextStrokeColor3 = Color3.new(0, 0, 0)
+    hpText.TextStrokeTransparency = 0
+
+    -- Create WalkSpeed text label
+    local speedText = Instance.new("TextLabel")
+    speedText.Name = "SpeedText"
+    speedText.Size = UDim2.new(1, 0, 0.5, 0)
+    speedText.Position = UDim2.new(0, 0, 0.5, 0)
+    speedText.BackgroundTransparency = 1
+    speedText.TextScaled = true
+    speedText.Font = Enum.Font.Arcade
+    speedText.TextColor3 = Color3.new(0.8, 0.8, 1)
+    speedText.TextStrokeColor3 = Color3.new(0, 0, 0)
+    speedText.TextStrokeTransparency = 0
+
+    -- Add labels to billboard
+    hpText.Parent = billboard
+    speedText.Parent = billboard
+    billboard.Parent = head
+
+    -- Function to update the display
+    local function updateDisplay()
+        -- Update HP display
+        local healthPercent = (humanoid.Health / humanoid.MaxHealth) * 100
+        
+        if healthPercent > 70 then
+            hpText.TextColor3 = Color3.new(0, 1, 0) -- Green
+        elseif healthPercent > 30 then
+            hpText.TextColor3 = Color3.new(1, 1, 0) -- Yellow
+        else
+            hpText.TextColor3 = Color3.new(1, 0, 0) -- Red
+        end
+        
+        hpText.Text = string.format("HP: %d/%d", math.floor(humanoid.Health), humanoid.MaxHealth)
+        
+        -- Update WalkSpeed display
+        local currentSpeed = humanoid.WalkSpeed
+        local speedPercent = (currentSpeed / WALKSPEED_MAX) * 100
+        
+        -- Color coding for speed
+        if speedPercent > 100 then
+            speedText.TextColor3 = Color3.new(1, 0, 1) -- Purple (over max speed)
+        elseif speedPercent > 70 then
+            speedText.TextColor3 = Color3.new(0, 1, 1) -- Cyan (fast)
+        else
+            speedText.TextColor3 = Color3.new(0.8, 0.8, 1) -- Light blue (normal)
+        end
+        
+        speedText.Text = string.format("Speed: %d/%d", math.floor(currentSpeed), WALKSPEED_MAX)
+    end
+
+    -- Connect health changes
+    humanoid.HealthChanged:Connect(updateDisplay)
+    
+    -- Regularly update WalkSpeed (since it doesn't have a changed event)
+    local speedUpdateConnection
+    speedUpdateConnection = game:GetService("RunService").Heartbeat:Connect(function()
+        updateDisplay()
+    end)
+    
+    -- Clean up when character is removed
+    character.AncestryChanged:Connect(function(_, parent)
+        if not parent then
+            speedUpdateConnection:Disconnect()
+            billboard:Destroy()
+        end
+    end)
+end
+
+-- Setup displays for all existing players
+for _, player in ipairs(Players:GetPlayers()) do
+    if player.Character then
+        createPlayerDisplay(player)
+    end
+     
+    player.CharacterAdded:Connect(function(character)
+        createPlayerDisplay(player)
+    end)
+end
+
+-- Setup for new players
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function(character)
+        createPlayerDisplay(player)
+    end)
+end)
+end})
+
 local player = game:GetService("Players").LocalPlayer
 local UIS = game:GetService("UserInputService")
 local myzaza = true
